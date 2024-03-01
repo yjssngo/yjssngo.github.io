@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your NGO Name</title>
+    <title>युवा जनकल्याण सेवा संस्था</title>
     <link rel="stylesheet" href="styles.css">
-	<!-- Add these lines in the head section of your HTML -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
-<script src="script.js"></script>
-
 </head>
 <body>
 
     <header>
-        <h1>युवा जनकल्याण सेवा संस्था </h1>
+        <div class="logo">
+            <img src="logo.png" alt="युवा जनकल्याण सेवा संस्था Logo">
+        </div>
+        <h1>युवा जनकल्याण सेवा संस्था</h1>
         <nav>
             <a href="#about">About Us</a>
             <a href="#events">Events</a>
@@ -24,6 +23,12 @@
             <a href="#join">Join Us</a>
         </nav>
     </header>
+
+    <section id="hero">
+        <h2>Your NGO Slogan Here</h2>
+        <p>Empowering Youth, Transforming Lives</p>
+        <a href="#donate" class="cta-button">Donate Now</a>
+    </section>
 
     <section id="about">
         <h2>About Us</h2>
@@ -39,12 +44,6 @@
         <h2>Donate</h2>
         <button onclick="showPaymentModal()">Donate Now</button>
     </section>
-	<section id="donorsList">
-    <h2>Donors List</h2>
-    <ul id="donors-list">
-        <!-- Donors list will be populated here dynamically -->
-    </ul>
-</section>
 
     <section id="media">
         <h2>Media Coverage</h2>
@@ -67,7 +66,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 युवा जनकल्याण सेवा संस्था . All rights reserved.</p>
+        <p>&copy; 2024 युवा जनकल्याण सेवा संस्था. All rights reserved.</p>
     </footer>
 
     <!-- Payment Modal - Placeholder (For demonstration purposes only) -->
