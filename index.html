@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your NGO Name</title>
+    <link rel="stylesheet" href="styles.css">
+	<!-- Add these lines in the head section of your HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+<script src="script.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <h1>युवा जनकल्याण सेवा संस्था </h1>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#events">Events</a>
+            <a href="#donate">Donate</a>
+            <a href="#media">Media Coverage</a>
+            <a href="#awards">Awards</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#join">Join Us</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Write a brief description about your NGO and its mission.</p>
+    </section>
+
+    <section id="events">
+        <h2>Events</h2>
+        <p>Highlight upcoming events and activities organized by your NGO.</p>
+    </section>
+
+    <section id="donate">
+        <h2>Donate</h2>
+        <button onclick="showPaymentModal()">Donate Now</button>
+    </section>
+	<section id="donorsList">
+    <h2>Donors List</h2>
+    <ul id="donors-list">
+        <!-- Donors list will be populated here dynamically -->
+    </ul>
+</section>
+
+    <section id="media">
+        <h2>Media Coverage</h2>
+        <p>Showcase media coverage, press releases, or news about your NGO.</p>
+    </section>
+
+    <section id="awards">
+        <h2>Awards</h2>
+        <p>Display any awards or recognitions your NGO has received.</p>
+    </section>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <p>Share what people are saying about your NGO.</p>
+    </section>
+
+    <section id="join">
+        <h2>Come and Join Us</h2>
+        <p>Encourage people to join your NGO. Provide information on how they can get involved.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 युवा जनकल्याण सेवा संस्था . All rights reserved.</p>
+    </footer>
+
+    <!-- Payment Modal - Placeholder (For demonstration purposes only) -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            <!-- Payment gateway form or details go here -->
+            <p>This is a placeholder for the payment gateway form.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
