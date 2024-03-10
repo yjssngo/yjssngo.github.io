@@ -6,6 +6,7 @@
     <title>युवा जनकल्याण सेवा संस्था</title>
     <link rel="stylesheet" href="./styles.css">
 	<style>
+	
         /* Add this style to make the logo circular and center it */
         .logo-container {
             display: flex;
@@ -40,6 +41,38 @@
         /* Keyframes for the rotation effect */
         @keyframes rotateMedia {
             0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+		/* Add this style for the moving effect */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            margin-right: 20px; /* Adjust the spacing between images */
+        }
+
+        /* Keyframes for the moving effect */
+        @keyframes moveMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+		/* Add this style for the moving effect */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            margin-right: 20px; /* Adjust the spacing between images */
+        }
+
+        /* Keyframes for the moving effect */
+        @keyframes moveMedia {
+            0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
     </style>
@@ -107,43 +140,39 @@
     <section id="media">
         <h2>Media Coverage</h2>
 
-        <!-- Container for rotating effect -->
-        <div class="rotate-container">
-            <!-- Media items with rotating effect -->
-            <div class="media-outlets">
-                <div class="media-item">
-                    <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
-                    <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">News Article Title 1</a></p>
-                </div>
-
-                <div class="media-item">
-                    <img src="./mc2.jpeg" alt="Media Outlet 2 Logo">
-                    <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 2</a></p>
-                </div>
-
-                <div class="media-item">
-                    <img src="./mc3.jpeg" alt="Media Outlet 3 Logo">
-                    <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 3</a></p> -->
-                </div>
-
-                <div class="media-item">
-                    <img src="./mc4.jpeg" alt="Media Outlet 4 Logo">
-                    <!-- <p><a href="./media_coverage/mc4.jpeg" target="_blank">News Article Title 4</a></p> -->
-                </div>
-
-                <div class="media-item">
-                    <img src="./mc5.jpeg" alt="Media Outlet 5 Logo">
-                    <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 5</a></p> -->
-                </div>
-
-                <div class="media-item">
-                    <img src="./mc6.jpeg" alt="Media Outlet 6 Logo">
-                    <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 6</a></p> -->
-                </div>
+        <!-- Container for moving effect -->
+        <div class="media-outlets">
+            <!-- Media items with moving effect -->
+            <div class="media-item">
+                <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
+                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">News Article Title 1</a></p>
             </div>
-        </div>
-		
-    </section>
+
+            <div class="media-item">
+                <img src="./mc2.jpeg" alt="Media Outlet 2 Logo">
+                <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 2</a></p>
+            </div>
+
+            <div class="media-item">
+                <img src="./mc3.jpeg" alt="Media Outlet 3 Logo">
+                <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 3</a></p> -->
+            </div>
+
+            <div class="media-item">
+                <img src="./mc4.jpeg" alt="Media Outlet 4 Logo">
+                <!-- <p><a href="./media_coverage/mc4.jpeg" target="_blank">News Article Title 4</a></p> -->
+            </div>
+
+            <div class="media-item">
+                <img src="./mc5.jpeg" alt="Media Outlet 5 Logo">
+                <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 5</a></p> -->
+            </div>
+
+            <div class="media-item">
+                <img src="./mc6.jpeg" alt="Media Outlet 6 Logo">
+                <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 6</a></p> -->
+            </div>
+        </div>    </section>
 
 
     <section id="awards">
