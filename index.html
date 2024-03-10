@@ -75,7 +75,36 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+		/* Add this style for the rotating effect and fixed size */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            width: 100%; /* Adjust as needed */
+            max-width: 800px; /* Set a maximum width for visibility */
+            margin: 0 auto; /* Center the container */
+            animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            width: 150px; /* Fixed width for each image */
+            height: 150px; /* Fixed height for each image */
+            margin-right: 20px; /* Adjust the spacing between images */
+            overflow: hidden; /* Hide overflow for consistent appearance */
+        }
+
+        .media-item img {
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container while maintaining aspect ratio */
+        }
+
+        /* Keyframes for the rotating effect */
+        @keyframes rotateMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
+    
 </head>
 <body>
 
@@ -140,9 +169,9 @@
     <section id="media">
         <h2>Media Coverage</h2>
 
-        <!-- Container for moving effect -->
+        <!-- Container for rotating effect -->
         <div class="media-outlets">
-            <!-- Media items with moving effect -->
+            <!-- Media items with rotating effect and fixed size -->
             <div class="media-item">
                 <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
                 <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">News Article Title 1</a></p>
@@ -172,7 +201,8 @@
                 <img src="./mc6.jpeg" alt="Media Outlet 6 Logo">
                 <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 6</a></p> -->
             </div>
-        </div>    </section>
+        </div>
+  </section>
 
 
     <section id="awards">
