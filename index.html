@@ -103,6 +103,47 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+		/* Add this style for the rotating effect and fixed size */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            width: 100%; /* Adjust as needed */
+            max-width: 800px; /* Set a maximum width for visibility */
+            margin: 0 auto; /* Center the container */
+            animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            width: 150px; /* Fixed width for each image */
+            height: 150px; /* Fixed height for each image */
+            margin-right: 20px; /* Adjust the spacing between images */
+            overflow: hidden; /* Hide overflow for consistent appearance */
+        }
+
+        .media-item img {
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container while maintaining aspect ratio */
+        }
+
+        /* Add this style to stop the rotation on hover */
+        .media-outlets:hover {
+            animation-play-state: paused;
+        }
+
+        /* Keyframes for the rotating effect */
+        @keyframes rotateMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Add this style for the equal height and width in the footer */
+        .footer-logo img, .social-media img {
+            width: 50px; /* Adjust as needed */
+            height: 50px; /* Adjust as needed */
+            object-fit: cover; /* Ensure images maintain aspect ratio */
+        }
+    
     </style>
     
 </head>
