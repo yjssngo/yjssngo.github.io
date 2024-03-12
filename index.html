@@ -382,5 +382,16 @@
     </div>
 
     <script src="./script.js"></script>
+	<script>
+        function toggleMenu() {
+            var nav = document.querySelector('.main-nav');
+            nav.classList.toggle('show-menu');
+        }
+
+        function openMediaPopup(imageSrc) {
+            var popup = window.open('', '_blank');
+            popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
+        }
+    </script>
 </body>
 </html>
