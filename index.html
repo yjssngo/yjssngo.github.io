@@ -17,11 +17,11 @@
 	}
 	</script>
 	<script>
-function openMediaPopup(imageSrc) {
-    var popup = window.open('', '_blank');
-    popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
-}
-</script>
+	function openMediaPopup(imageSrc) {
+		var popup = window.open('', '_blank');
+		popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
+	}
+	</script>
 	<style>
 	
         /* Add this style to make the logo circular and center it */
@@ -196,27 +196,36 @@ function openMediaPopup(imageSrc) {
 				cursor: pointer;
 			}
 		}
+		/* Add this style for navbar container */
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
     
 </head>
 <body>
 
     <header>
-        <div class="logo-container">
-            <div class="logo">
-                <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
+                </div>
             </div>
+            <!-- Add this button for mobile navigation -->
+            <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <nav class="main-nav">
+                <a href="#about">About Us</a>
+                <a href="#events">Events</a>
+                <a href="#donate">Donate</a>
+                <a href="#media">Media Coverage</a>
+                <a href="#awards">Awards</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#join">Join Us</a>
+            </nav>
         </div>
-        <h1>युवा जनकल्याण सेवा संस्था</h1>
-        <nav>
-            <a href="#about">About Us</a>
-            <a href="#events">Events</a>
-            <a href="#donate">Donate</a>
-            <a href="#media">Media Coverage</a>
-            <a href="#awards">Awards</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#join">Join Us</a>
-        </nav>
     </header>
 
     <section id="hero">
