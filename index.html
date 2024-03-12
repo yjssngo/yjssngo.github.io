@@ -1,10 +1,29 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>युवा जनकल्याण सेवा संस्था</title>
     <link rel="stylesheet" href="./styles.css">
+	<button class="menu-icon" onclick="toggleMenu()">☰</button>
+
+	<nav class="main-nav">
+		<!-- Your regular navigation items go here -->
+	</nav>
+		<script>
+	function toggleMenu() {
+		var nav = document.querySelector('.main-nav');
+		nav.classList.toggle('show-menu');
+	}
+	</script>
+	<script>
+function openMediaPopup(imageSrc) {
+    var popup = window.open('', '_blank');
+    popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
+}
+</script>
 	<style>
+	
         /* Add this style to make the logo circular and center it */
         .logo-container {
             display: flex;
@@ -25,63 +44,55 @@
             height: auto;
             display: block;
         }
-
-        /* Add this style for responsive font size in the header */
-        header h1 {
-            font-size: 2em;
+		/* Add this style for the rotating effect */
+        .rotate-container {
+            display: flex;
+            overflow: hidden;
+            animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
         }
 
-        @media screen and (min-width: 600px) {
-            header h1 {
-                font-size: 3em;
-            }
-        }
-
-        /* Add this style for mobile navigation */
-        .menu-icon {
-            display: none;
-        }
-
-        @media screen and (max-width: 600px) {
-            .main-nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px; /* Adjust the distance from the top */
-                left: 0;
-                width: 100%;
-                background-color: #fff; /* Adjust the background color */
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow */
-            }
-
-            .main-nav.show-menu {
-                display: flex;
-            }
-
-            .main-nav a {
-                padding: 10px;
-                text-align: center;
-            }
-
-            .menu-icon {
-                display: block;
-                position: absolute;
-                top: 20px; /* Adjust the distance from the top */
-                right: 20px; /* Adjust the distance from the right */
-                font-size: 20px;
-                cursor: pointer;
-            }
-        }
-
-        /* Add this style for equal height and width in media coverage */
         .media-item {
-            width: 150px; /* Fixed width for each image */
-            height: 150px; /* Fixed height for each image */
             margin-right: 20px; /* Adjust the spacing between images */
-            overflow: hidden; /* Hide overflow for consistent appearance */
         }
 
-        /* Add this style for the rotating effect and fixed size */
+        /* Keyframes for the rotation effect */
+        @keyframes rotateMedia {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+		/* Add this style for the moving effect */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            margin-right: 20px; /* Adjust the spacing between images */
+        }
+
+        /* Keyframes for the moving effect */
+        @keyframes moveMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+		/* Add this style for the moving effect */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            margin-right: 20px; /* Adjust the spacing between images */
+        }
+
+        /* Keyframes for the moving effect */
+        @keyframes moveMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+		/* Add this style for the rotating effect and fixed size */
         .media-outlets {
             display: flex;
             overflow: hidden;
@@ -91,15 +102,56 @@
             animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
         }
 
+        .media-item {
+            width: 150px; /* Fixed width for each image */
+            height: 150px; /* Fixed height for each image */
+            margin-right: 20px; /* Adjust the spacing between images */
+            overflow: hidden; /* Hide overflow for consistent appearance */
+        }
+
+        .media-item img {
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container while maintaining aspect ratio */
+        }
+
         /* Keyframes for the rotating effect */
         @keyframes rotateMedia {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+		/* Add this style for the rotating effect and fixed size */
+        .media-outlets {
+            display: flex;
+            overflow: hidden;
+            width: 100%; /* Adjust as needed */
+            max-width: 800px; /* Set a maximum width for visibility */
+            margin: 0 auto; /* Center the container */
+            animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
+        }
+
+        .media-item {
+            width: 150px; /* Fixed width for each image */
+            height: 150px; /* Fixed height for each image */
+            margin-right: 20px; /* Adjust the spacing between images */
+            overflow: hidden; /* Hide overflow for consistent appearance */
+        }
+
+        .media-item img {
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container while maintaining aspect ratio */
+        }
 
         /* Add this style to stop the rotation on hover */
         .media-outlets:hover {
             animation-play-state: paused;
+        }
+
+        /* Keyframes for the rotating effect */
+        @keyframes rotateMedia {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* Add this style for the equal height and width in the footer */
@@ -108,7 +160,44 @@
             height: 50px; /* Adjust as needed */
             object-fit: cover; /* Ensure images maintain aspect ratio */
         }
+			/* Add this style for mobile navigation */
+		.menu-icon {
+			display: none;
+		}
+
+		@media screen and (max-width: 600px) {
+			/* Adjust the breakpoint as needed */
+			.main-nav {
+				display: none;
+				flex-direction: column;
+				position: absolute;
+				top: 60px; /* Adjust the distance from the top */
+				left: 0;
+				width: 100%;
+				background-color: #fff; /* Adjust the background color */
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+			}
+
+			.main-nav.show-menu {
+				display: flex;
+			}
+
+			.main-nav a {
+				padding: 10px;
+				text-align: center;
+			}
+
+			.menu-icon {
+				display: block;
+				position: absolute;
+				top: 20px; /* Adjust the distance from the top */
+				right: 20px; /* Adjust the distance from the right */
+				font-size: 20px;
+				cursor: pointer;
+			}
+		}
     </style>
+    
 </head>
 <body>
 
@@ -119,9 +208,7 @@
             </div>
         </div>
         <h1>युवा जनकल्याण सेवा संस्था</h1>
-        <!-- Add this button for mobile navigation -->
-        <button class="menu-icon" onclick="toggleMenu()">☰</button>
-        <nav class="main-nav">
+        <nav>
             <a href="#about">About Us</a>
             <a href="#events">Events</a>
             <a href="#donate">Donate</a>
