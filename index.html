@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>युवा जनकल्याण सेवा संस्था</title>
     <link rel="stylesheet" href="./styles.css">
-	<style>
+    <style>
         /* Add this style to make the logo circular and center it */
         .logo-container {
             display: flex;
@@ -72,44 +72,81 @@
                 font-size: 20px;
                 cursor: pointer;
             }
+
+            /* Add this style for navbar container */
+            .navbar-container {
+                display: flex;
+                justify-content: center; /* Center the items */
+                flex-wrap: wrap; /* Wrap the items onto multiple lines */
+            }
+
+            .navbar-container a {
+                margin: 5px; /* Adjust spacing between items */
+            }
         }
 
-        /* Add this style for navbar container */
-        .navbar-container {
+        /* Add this style for media coverage section */
+        .media-outlets {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap; /* Wrap items onto multiple lines */
+            justify-content: center; /* Center the items */
+            gap: 10px; /* Adjust spacing between items */
+        }
+
+        .media-item {
+            width: 200px; /* Adjust the width as needed */
+            height: 200px; /* Adjust the height as needed */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the entire area */
+        }
+
+        .media-item p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+            margin: 0;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="navbar-container">
-            <div class="logo-container">
-                <div class="logo">
-                    <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
-                </div>
+<header>
+    <div class="navbar-container">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
             </div>
-            <!-- Add this button for mobile navigation -->
-            <button class="menu-icon" onclick="toggleMenu()">☰</button>
-            <nav class="main-nav">
-                <a href="#about">About Us</a>
-                <a href="#events">Events</a>
-                <a href="#donate">Donate</a>
-                <a href="#media">Media Coverage</a>
-                <a href="#awards">Awards</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#join">Join Us</a>
-            </nav>
         </div>
-    </header>       
+        <!-- Add this button for mobile navigation -->
+        <button class="menu-icon" onclick="toggleMenu()">☰</button>
+        <nav class="main-nav">
+            <a href="#about">About Us</a>
+            <a href="#events">Events</a>
+            <a href="#donate">Donate</a>
+            <a href="#media">Media Coverage</a>
+            <a href="#awards">Awards</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#join">Join Us</a>
+        </nav>
+    </div>
+</header>
 
-    <section id="hero">
-        <h2>शिक्षित बनो, सशक्त बनो</h2>
-        <p>Be Educated, Be Empowered</p>
-        <a href="#donate" class="cta-button">Donate Now</a>
-    </section>
+<section id="hero">
+    <h2>शिक्षित बनो, सशक्त बनो</h2>
+    <p>Be Educated, Be Empowered</p>
+    <a href="#donate" class="cta-button">Donate Now</a>
+</section>
 
     <section id="about">
         <h2>About Us</h2>
@@ -146,16 +183,16 @@
 		
     </section>
 
-    <section id="media">
-        <h2>Media Coverage</h2>
+    <<section id="media">
+    <h2>Media Coverage</h2>
 
-        <!-- Container for rotating effect -->
-        <div class="media-outlets">
-            <!-- Media items with rotating effect and fixed size -->
-            <div class="media-item" onclick="openImagePopup('./mc1.jpeg')">
-                <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
-                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
-            </div>
+    <!-- Container for rotating effect -->
+    <div class="media-outlets">
+        <!-- Media items with rotating effect and fixed size -->
+        <div class="media-item" onclick="openImagePopup('./mc1.jpeg')">
+            <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
+            <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
+        </div>
 
             <div class="media-item" onclick="openImagePopup('./mc2.jpeg')">
                 <img src="./mc2.jpeg" alt="Media Outlet 2 Logo">
