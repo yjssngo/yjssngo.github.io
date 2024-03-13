@@ -196,6 +196,34 @@
 				cursor: pointer;
 			}
 		}
+		@media screen and (min-width: 601px) {
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+            
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+            }
+        }
+        
+        /* Styles for mobile navigation */
+        /* ... */
 		
     </style>
     
@@ -204,21 +232,31 @@
 
     <header>
         <div class="navbar-container">
+            <!-- Logo -->
             <div class="logo-container">
                 <div class="logo">
                     <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
                 </div>
             </div>
-            <!-- Add this button for mobile navigation -->
+            <!-- Mobile navigation button -->
             <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <!-- Navigation -->
             <nav class="main-nav">
-                <a href="#about">About Us</a>
-                <a href="#events">Events</a>
-                <a href="#donate">Donate</a>
-                <a href="#media">Media Coverage</a>
-                <a href="#awards">Awards</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#join">Join Us</a>
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">About Us</a>
+                    <div class="dropdown-content">
+                        <a href="#about">Our Mission</a>
+                        <a href="#team">Our Team</a>
+						<a href="#events">Events</a>
+						<a href="#donate">Donate</a>
+						<a href="#media">Media Coverage</a>
+						<a href="#awards">Awards</a>
+						<a href="#testimonials">Testimonials</a>
+						<a href="#join">Join Us</a>
+						
+                    </div>
+                </div>
+                
             </nav>
         </div>
     </header>
