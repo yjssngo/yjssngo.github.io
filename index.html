@@ -103,15 +103,15 @@
         }
 
         .media-item {
-            width: 250px; /* Fixed width for each image */
-            height: 250px; /* Fixed height for each image */
+            width: 450px; /* Fixed width for each image */
+            height: 450px; /* Fixed height for each image */
             margin-right: 20px; /* Adjust the spacing between images */
             overflow: hidden; /* Hide overflow for consistent appearance */
         }
 
         .media-item img {
             width: 100%; /* Ensure the image fills the container */
-            height: auto; /* Maintain aspect ratio */
+            height: 80%; /* Maintain aspect ratio */
             object-fit: cover; /* Cover the container while maintaining aspect ratio */
         }
 
@@ -398,6 +398,45 @@
 /* For alternating direction of events */
 .event-section:nth-child(even) .event-images-container {
     flex-direction: row-reverse; /* Reverse the direction for even sections */
+}
+.event-images-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 200px; /* Adjust the height as needed */
+    animation-duration: 20s; /* Adjust the duration of the animation */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.event-images-container img {
+    width: auto;
+    height: 100%; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the spacing between images */
+}
+
+/* Animation for left to right movement */
+@keyframes moveLeftToRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Animation for right to left movement */
+@keyframes moveRightToLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Apply animation to every event-images-container */
+.event-section:nth-child(odd) .event-images-container {
+    animation-name: moveLeftToRight;
+}
+
+.event-section:nth-child(even) .event-images-container {
+    animation-name: moveRightToLeft;
 }
     </style>
     
