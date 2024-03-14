@@ -370,6 +370,35 @@
             display: inline-block;
             margin-left: 10px; /* Adjust spacing between images */
         }
+		.events-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-section {
+    margin-bottom: 20px;
+}
+
+.event-images-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 200px; /* Adjust the height as needed */
+}
+
+.event-images-container img {
+    width: auto;
+    height: 100%; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the spacing between images */
+}
+
+/* For alternating direction of events */
+.event-section:nth-child(even) .event-images-container {
+    flex-direction: row-reverse; /* Reverse the direction for even sections */
+}
     </style>
     
 </head>
@@ -446,7 +475,24 @@
 		<p>Updating...</p>
 		<a><u><h2  style="color:red;"><!--Debate--> <img src="./debate1.jpg" Height="100" widhth="100"></h2></u></a>
          <a><u><h2  style="color:red;"><!--Painting--><img src="./painting1.jpg" Height="75" widhth="75"></h2></u></a>
-		
+		<h1>Events</h1>
+    <div class="events-container">
+        <div class="event-section">
+            <h3>Debate Competition</h3>
+            <div class="event-images-container">
+                <img src="./debate1.jpg" alt="Debate Competition">
+                <!-- Add more images for the debate competition if needed -->
+            </div>
+        </div>
+        <div class="event-section">
+            <h3>Painting Competition</h3>
+            <div class="event-images-container">
+                <img src="./painting1.jpg" alt="Painting Competition">
+                <!-- Add more images for the painting competition if needed -->
+            </div>
+        </div>
+        <!-- Add more event sections as needed -->
+    </div>
 		
 		
     </section>
