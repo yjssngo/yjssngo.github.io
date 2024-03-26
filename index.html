@@ -433,6 +433,30 @@
 .event-section:nth-child(even) .event-images-container {
     animation-name: moveRightToLeft;
 }
+ /* Add this style for the media items to have equal height and width */
+    .media-item {
+        width: 200px; /* Set a fixed width for each media item */
+        height: 200px; /* Set a fixed height for each media item */
+        margin-right: 20px; /* Adjust the spacing between media items */
+        overflow: hidden; /* Hide overflow for consistent appearance */
+    }
+
+    .media-item img {
+        width: 100%; /* Ensure the image fills the container */
+        height: 100%; /* Ensure the image fills the container */
+        object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    }
+
+    /* Add this style for the popup content */
+    .popup-content img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* Add this style for the slider option */
+    .popup-content {
+        overflow: auto; /* Enable scrolling for images exceeding the viewport */
+    }
     </style>
     
 </head>
