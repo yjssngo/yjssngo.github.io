@@ -51,9 +51,6 @@
             animation: rotateMedia 20s linear infinite; /* Adjust the duration as needed */
         }
 
-        .media-item {
-            margin-right: 20px; /* Adjust the spacing between images */
-        }
 
         /* Keyframes for the rotation effect */
         @keyframes rotateMedia {
@@ -83,9 +80,7 @@
             animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
         }
 
-        .media-item {
-            margin-right: 20px; /* Adjust the spacing between images */
-        }
+        
 
         /* Keyframes for the moving effect */
         @keyframes moveMedia {
@@ -590,7 +585,12 @@
             </div>
         </div>
   </section>
-
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <img id="popup-image" src="" alt="Popup Image">
+    </div>
+</div>
 
     <section id="awards">
         <h2>Awards</h2>
@@ -674,14 +674,20 @@
             <p>This is a placeholder for the payment gateway form.</p>
         </div>
     </div>
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <img id="popup-image" src="" alt="Popup Image">
-    </div>
-</div>
+
     <script src="./script.js"></script>
 	<script>
+	function openPopup(imageSrc) {
+    var popup = document.getElementById("popup");
+    var popupImage = document.getElementById("popup-image");
+    popupImage.src = imageSrc;
+    popup.style.display = "block";
+}
+
+function closePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
 function toggleMenu() {
     var x = document.getElementById("navbar");
     if (x.className === "navbar-container") {
@@ -690,6 +696,7 @@ function toggleMenu() {
         x.className = "navbar-container";
     }
 }
+
 </script>
 <script>
 function toggleMenu() {
