@@ -68,17 +68,6 @@
             margin-right: 20px; /* Adjust the spacing between images */
         }
 
-        /* Keyframes for the moving effect */
-        @keyframes moveMedia {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-		/* Add this style for the moving effect */
-        .media-outlets {
-            display: flex;
-            overflow: hidden;
-            animation: moveMedia 20s linear infinite; /* Adjust the duration as needed */
-        }
 
         
 
@@ -434,14 +423,14 @@
     animation-name: moveRightToLeft;
 }
  /* Add this style for the media items to have equal height and width */
-    .media-item {
+    .media-items {
         width: 400px; /* Set a fixed width for each media item */
         height: 200px; /* Set a fixed height for each media item */
         margin-right: 20px; /* Adjust the spacing between media items */
         overflow: hidden; /* Hide overflow for consistent appearance */
     }
 
-    .media-item img {
+    .media-items img {
         width: 100%; /* Ensure the image fills the container */
         height: 100%; /* Ensure the image fills the container */
         object-fit: cover; /* Cover the container while maintaining aspect ratio */
@@ -578,32 +567,32 @@
         <!-- Container for rotating effect -->
         <div class="media-outlets">
             <!-- Media items with rotating effect and fixed size -->
-            <div class="media-item" onclick="openPopup('./mc1.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc1.jpeg')">
                 <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
                 <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
             </div>
 
-            <div class="media-item" onclick="openPopup('./mc2.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc2.jpeg')">
                 <img src="./mc2.jpeg" alt="Media Outlet 2 Logo">
                 <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN Live</a></p>
             </div>
 
-            <div class="media-item" onclick="openPopup('./mc3.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc3.jpeg')">
 				<img src="./mc3.jpeg" alt="Media Outlet 3 Logo">
 				<!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 3</a></p> -->
 			</div>
 
-            <div class="media-item" onclick="openPopup('./mc4.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc4.jpeg')">
                 <img src="./mc4.jpeg" alt="Media Outlet 4 Logo">
                 <!-- <p><a href="./media_coverage/mc4.jpeg" target="_blank">News Article Title 4</a></p> -->
             </div>
 
-            <div class="media-item" onclick="openPopup('./mc5.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc5.jpeg')">
                 <img src="./mc5.jpeg" alt="Media Outlet 5 Logo">
                 <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 5</a></p> -->
             </div>
 
-            <div class="media-item" onclick="openPopup('./mc6.jpeg')">
+            <div class="media-items" onclick="openPopup('./mc6.jpeg')">
                 <img src="./mc6.jpeg" alt="Media Outlet 6 Logo">
                 <!-- <p><a href="https://sbnlive.net/?p=149709" target="_blank">News Article Title 6</a></p> -->
             </div>
