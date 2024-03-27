@@ -637,93 +637,19 @@
 
     <section id="join">
         <h2>Come and Join Us</h2>
-        <p>Support us in making change in society</p>
-		 <h2>Donation Form</h2>
-    <form id="donationForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="fathersName">Father's Name:</label>
-        <input type="text" id="fathersName" name="fathersName" required><br>
-
-        <label for="mobileNumber">Mobile Number:</label>
-        <input type="text" id="mobileNumber" name="mobileNumber" required><br>
-
-        <label for="occupation">Occupation:</label>
-        <input type="text" id="occupation" name="occupation" required><br>
-
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" required><br>
-
-        <label for="year">Year:</label>
-        <input type="text" id="year" name="year" required><br>
-
-        <label for="place">Place:</label>
-        <input type="text" id="place" name="place" required><br>
-
-        <button type="button" onclick="saveData()">Submit</button>
-    </form>
-
-    <script>
-        function saveData() {
-            const form = document.getElementById('donationForm');
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            const accessToken = 'YOUR_ACCESS_TOKEN'; // Replace with your GitHub access token
-            const repoOwner = 'YOUR_USERNAME'; // Replace with your GitHub username
-            const repoName = 'YOUR_REPO_NAME'; // Replace with your GitHub repository name
-            const filePath = 'AnnualMembers.xlsx'; // Replace with the path to your Excel file in the repository
-
-            fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `token ${accessToken}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const content = atob(data.content);
-                const workbook = XLSX.read(content, { type: 'binary' });
-                const worksheet = workbook.Sheets['Donations'];
-
-                const newRow = XLSX.utils.sheet_add_json(worksheet, [data], { origin: -1 });
-                const newContent = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
-
-                fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
-                    method: 'PUT',
-                    headers: {
-                        Authorization: `token ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: 'Add new donation',
-                        content: btoa(newContent),
-                        sha: data.sha
-                    })
-                })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert('Donation data saved successfully!');
-                        form.reset();
-                    } else {
-                        alert('Failed to save donation data.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to save donation data.');
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to fetch donation data.');
-            });
-        }
-    </script>
+		<img src="./ubi_account_qr.jpeg" alt="Media Outlet 1 Logo" Height="25" widhth="25">
+        <p>Donate here for Annunal Membership 2024</p>
+		<!--
+		Google Form Link
+		https://docs.google.com/forms/d/e/1FAIpQLSeU6iB83zlvSkzcJ36-m7eWNhE5S0lAsVpRbtKtDVNLHmCQGQ/viewform?usp=pp_url
+		
+		-->
+		<!--<a href="#donate" class="cta-button">Fill the Form</a>-->
+        <p>After Payment Please Fil the Form to get your Name Displayed in Annual Memership List</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeU6iB83zlvSkzcJ36-m7eWNhE5S0lAsVpRbtKtDVNLHmCQGQ/viewform?usp=pp_url" class="cta-button">Submit the Form</a>
+		
+		
+    
 		<h3>Annual Memebers 2024</h3>
         
 		<div class="container">
@@ -826,18 +752,18 @@
                 </tr>
 				<tr align="center">
                     <td><a href="https://www.facebook.com/profile.php?id=100037947527727"><u><h2 style="color:red;"><!Facebook><img src="./fb.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://www.instagram.com/iiit_champion/"> <h2  style="color:red;"><!Instagram> <img src="./insta.jpg" Height="25" widhth="25"></h2></a></td>
-						<td><a href="https://twitter.com/Champion_Rajesh/"><u><h2  style="color:red;"><!Twiter><img src="./twitter.png" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://join.skype.com/invite/YJUXXUeSumjU"><u><h2  style="color:red;"><!Skype><img src="./skype.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!WhatsApp><img src="./whatsapp.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://www.linkedin.com/in/athletechampion/"><u><h2 style="color:red;"><!LinkedIn><img src="./ld.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="http://www.hackerearth.com/@rajesh2243"><u><h2 style="color:red;"><!HackerEarth><img src="./he.png" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://www.hackerrank.com/iiitchamp"><u><h2 style="color:red;"><!HackerRank><img src="./HR.png" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://leetcode.com/iiit_champion/"><u><h2 style="color:red;"><!LeetCode><img src="./lc.png" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!Telegram><img src="./telegram.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!Snapchat><img src="./snapchat.jpg" Height="25" widhth="25"></h2></u></a></td>
-						<td><a href="https://www.youtube.com/channel/UCV5OvrXG7Pd6h2O-TOfrh5Q?view_as=subscriber"><u><h2 style="color:red;"><!YouTube><img src="./youtube.jpg" Height="25" widhth="25"></h2></u></a></td>
-					</tr>
+					<td><a href="https://www.instagram.com/iiit_champion/"> <h2  style="color:red;"><!Instagram> <img src="./insta.jpg" Height="25" widhth="25"></h2></a></td>
+					<td><a href="https://twitter.com/Champion_Rajesh/"><u><h2  style="color:red;"><!Twiter><img src="./twitter.png" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://join.skype.com/invite/YJUXXUeSumjU"><u><h2  style="color:red;"><!Skype><img src="./skype.jpg" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!WhatsApp><img src="./whatsapp.jpg" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://www.linkedin.com/in/athletechampion/"><u><h2 style="color:red;"><!LinkedIn><img src="./ld.jpg" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="http://www.hackerearth.com/@rajesh2243"><u><h2 style="color:red;"><!HackerEarth><img src="./he.png" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://www.hackerrank.com/iiitchamp"><u><h2 style="color:red;"><!HackerRank><img src="./HR.png" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://leetcode.com/iiit_champion/"><u><h2 style="color:red;"><!LeetCode><img src="./lc.png" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!Telegram><img src="./telegram.jpg" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://wa.me/+918259952348"><u><h2 style="color:red;"><!Snapchat><img src="./snapchat.jpg" Height="25" widhth="25"></h2></u></a></td>
+					<td><a href="https://www.youtube.com/channel/UCV5OvrXG7Pd6h2O-TOfrh5Q?view_as=subscriber"><u><h2 style="color:red;"><!YouTube><img src="./youtube.jpg" Height="25" widhth="25"></h2></u></a></td>
+				</tr>
 				
             </tbody>
         </table>
