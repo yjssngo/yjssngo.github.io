@@ -23,6 +23,26 @@
 	}
 	</script>
 	<style>
+	.container {
+            width: 100%;
+            overflow-y: scroll;
+            height: 300px; /* Adjust height as needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
 	
         /* Add this style to make the logo circular and center it */
         .logo-container {
@@ -644,8 +664,6 @@
         <button type="button" onclick="saveData()">Submit</button>
     </form>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>-->
-	<script src="./xlsx.full.min.js"></script>
     <script>
         function saveData() {
             const form = document.getElementById('donationForm');
@@ -655,79 +673,117 @@
                 data[key] = value;
             });
 
-            const wb = XLSX.utils.book_new();
-            wb.Props = {
-                Title: 'Donation Data',
-                Author: 'Your Name',
-                CreatedDate: new Date()
-            };
-            wb.SheetNames.push('Donations');
-            const wsData = [Object.keys(data), Object.values(data)];
-            const ws = XLSX.utils.aoa_to_sheet(wsData);
-            wb.Sheets['Donations'] = ws;
-            const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+            const accessToken = 'YOUR_ACCESS_TOKEN'; // Replace with your GitHub access token
+            const repoOwner = 'YOUR_USERNAME'; // Replace with your GitHub username
+            const repoName = 'YOUR_REPO_NAME'; // Replace with your GitHub repository name
+            const filePath = 'AnnualMembers.xlsx'; // Replace with the path to your Excel file in the repository
 
-            function s2ab(s) {
-                const buf = new ArrayBuffer(s.length);
-                const view = new Uint8Array(buf);
-                for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                return buf;
-            }
+            fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `token ${accessToken}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const content = atob(data.content);
+                const workbook = XLSX.read(content, { type: 'binary' });
+                const worksheet = workbook.Sheets['Donations'];
 
-            const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-            const fileName = 'donation_data.xlsx';
-            if (navigator.msSaveBlob) {
-                // For IE
-                navigator.msSaveBlob(blob, fileName);
-            } else {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.setAttribute('download', fileName);
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
+                const newRow = XLSX.utils.sheet_add_json(worksheet, [data], { origin: -1 });
+                const newContent = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+
+                fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `token ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Add new donation',
+                        content: btoa(newContent),
+                        sha: data.sha
+                    })
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Donation data saved successfully!');
+                        form.reset();
+                    } else {
+                        alert('Failed to save donation data.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to save donation data.');
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to fetch donation data.');
+            });
         }
     </script>
 		<h3>Annual Memebers 2024</h3>
         
-		<ul id="donorList"></ul>
+		<div class="container">
+        <table id="membersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Father's Name</th>
+                    <th>Mobile Number</th>
+                    <th>Occupation</th>
+                    <th>Amount</th>
+                    <th>Year</th>
+                    <th>Place</th>
+                    <th>Mode of Transaction</th>
+                    <th>Unique Transaction Number</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Member data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>-->
-	<script src="./xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
     <script>
-        // Fetch data from GitHub repository
-        function fetchData() {
-            const url = './AnnualMemebers.xlsx'; // Replace with your GitHub repository URL
-            fetch(url)
-                .then(response => response.arrayBuffer())
-                .then(buffer => {
-                    const workbook = XLSX.read(new Uint8Array(buffer), { type: 'array' });
-                    const sheetName = workbook.SheetNames[0]; // Assuming data is in the first sheet
-                    const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-                    displayData(data);
-                })
-                .catch(err => console.error('Error fetching data:', err));
+        async function fetchData() {
+            const response = await fetch('./AnnualMemebers.xlsx');
+            const data = await response.arrayBuffer();
+            return new Uint8Array(data);
         }
 
-        // Display data on the website
-        function displayData(data) {
-            const donorList = document.getElementById('donorList');
-            donorList.innerHTML = ''; // Clear existing list
+        async function parseExcel() {
+            const data = await fetchData();
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            return XLSX.utils.sheet_to_json(sheet);
+        }
 
-            // Iterate through each row of data
+        function populateTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // Clear previous data
+
             data.forEach(row => {
-                const { Name, FathersName, MobileNumber, Occupation, Amount, Year, Place } = row;
-
-                // Create list item for each donor
-                const listItem = document.createElement('li');
-                listItem.textContent = `${Name} (${Occupation}): Donated ${Amount} in ${Year} from ${Place}`;
-                donorList.appendChild(listItem);
+                const newRow = document.createElement('tr');
+                Object.values(row).forEach(value => {
+                    const newCell = document.createElement('td');
+                    newCell.textContent = value;
+                    newRow.appendChild(newCell);
+                });
+                tableBody.appendChild(newRow);
             });
         }
 
-        // Fetch and display data when the page loads
-        window.onload = fetchData;
+        async function init() {
+            const excelData = await parseExcel();
+            populateTable(excelData);
+        }
+
+        init();
     </script>
     </section>
 	<section id="contact">
