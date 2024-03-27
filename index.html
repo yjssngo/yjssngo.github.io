@@ -10,7 +10,7 @@
 	<nav class="main-nav">
 		<!-- Your regular navigation items go here -->
 	</nav>
-		<script>
+<script>
 	function toggleMenu() {
 		var nav = document.querySelector('.main-nav');
 		nav.classList.toggle('show-menu');
@@ -617,14 +617,53 @@
 
     <section id="join">
         <h2>Come and Join Us</h2>
+        <p>Support us in making change in society</p>
+		<h2>Annual Memebers 2024</h2>
         <p>Encourage people to join your NGO. Provide information on how they can get involved.</p>
+		<ul id="donorList"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script>
+        // Fetch data from GitHub repository
+        function fetchData() {
+            const url = './AnnualMemebers.xlsx'; // Replace with your GitHub repository URL
+            fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(buffer => {
+                    const workbook = XLSX.read(new Uint8Array(buffer), { type: 'array' });
+                    const sheetName = workbook.SheetNames[0]; // Assuming data is in the first sheet
+                    const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                    displayData(data);
+                })
+                .catch(err => console.error('Error fetching data:', err));
+        }
+
+        // Display data on the website
+        function displayData(data) {
+            const donorList = document.getElementById('donorList');
+            donorList.innerHTML = ''; // Clear existing list
+
+            // Iterate through each row of data
+            data.forEach(row => {
+                const { Name, FathersName, MobileNumber, Occupation, Amount, Year, Place } = row;
+
+                // Create list item for each donor
+                const listItem = document.createElement('li');
+                listItem.textContent = `${Name} (${Occupation}): Donated ${Amount} in ${Year} from ${Place}`;
+                donorList.appendChild(listItem);
+            });
+        }
+
+        // Fetch and display data when the page loads
+        window.onload = fetchData;
+    </script>
     </section>
 	<section id="contact">
         <h2>Contact</h2>
         
 		<p>Mobile No: +91 8810841429</p>
 		<p>Mail id: new.yjss.ngo@gmail.com</p>
-        <p>Address : Dodhar Beejpur Sonebhara UP 231223, India</p>
+        <p>Address : Dodhar, Beejpur, Sonebhara, UP, 231223, India</p>
 		
 		
 		
