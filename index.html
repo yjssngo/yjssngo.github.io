@@ -561,14 +561,50 @@
 <body>
 <header>
 <div class="language-selector">
-  <select onchange="changeLanguage(this.value)">
+  <select id="languageSelect" onchange="changeLanguage()">
     <option value="english">English</option>
     <option value="hindi">हिंदी</option>
     <option value="spanish">Español</option>
     <!-- Add more language options as needed -->
   </select>
 </div>
+<script>
+function changeLanguage() {
+  var languageSelect = document.getElementById("languageSelect");
+  var selectedLanguage = languageSelect.value;
 
+  // Define language-specific translations
+  var translations = {
+    "english": {
+      "title": "Welcome",
+      "description": "This is some example text."
+    },
+    "hindi": {
+      "title": "स्वागत है",
+      "description": "यह कुछ उदाहरण टेक्स्ट है।"
+    },
+    "spanish": {
+      "title": "Bienvenido",
+      "description": "Este es un texto de ejemplo."
+    }
+    // Add more translations for additional languages
+  };
+
+  // Update page content with translations
+  var keys = Object.keys(translations[selectedLanguage]);
+  keys.forEach(function(key) {
+    var element = document.getElementById(key);
+    if (element) {
+      element.textContent = translations[selectedLanguage][key];
+    }
+  });
+}
+
+// Initialize language selection on page load
+window.onload = function() {
+  changeLanguage();
+};
+</script>
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
         <a href="#about">About Us</a>
