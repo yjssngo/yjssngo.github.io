@@ -23,6 +23,32 @@
 	}
 	</script>
 	<style>
+	/* Add this style for the media items to have equal height and width */
+.media-items {
+    width: 200px; /* Set a fixed width for each media item */
+    height: 200px; /* Set a fixed height for each media item */
+    margin-right: 20px; /* Adjust the spacing between media items */
+    overflow: hidden; /* Hide overflow for consistent appearance */
+    position: relative; /* Position relative for absolute positioning of link */
+}
+  /* Style for image within media item */
+.media-items img {
+    width: 100%; /* Ensure image fills the container */
+    height: 100%; /* Ensure image fills the container */
+    object-fit: cover; /* Maintain aspect ratio while covering container */
+}
+
+/* Style for the link */
+.media-items p {
+    position: absolute; /* Position link relative to its container */
+    bottom: 0; /* Align link to the bottom of the container */
+    left: 0; /* Align link to the left of the container */
+    width: 100%; /* Ensure link spans the width of the container */
+    margin: 0; /* Remove any default margin */
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background to enhance visibility */
+    padding: 5px; /* Add padding for better readability */
+    text-align: center; /* Center-align the text within the link */
+}
 	
 	.container {
             width: 100%;
@@ -765,32 +791,7 @@
             </div>
         </div>
   </section>
-  /* Add this style for the media items to have equal height and width */
-.media-items {
-    width: 200px; /* Set a fixed width for each media item */
-    height: 200px; /* Set a fixed height for each media item */
-    margin-right: 20px; /* Adjust the spacing between media items */
-    overflow: hidden; /* Hide overflow for consistent appearance */
-    position: relative; /* Position relative for absolute positioning of link */
-}
-  /* Style for image within media item */
-.media-items img {
-    width: 100%; /* Ensure image fills the container */
-    height: 100%; /* Ensure image fills the container */
-    object-fit: cover; /* Maintain aspect ratio while covering container */
-}
-
-/* Style for the link */
-.media-items p {
-    position: absolute; /* Position link relative to its container */
-    bottom: 0; /* Align link to the bottom of the container */
-    left: 0; /* Align link to the left of the container */
-    width: 100%; /* Ensure link spans the width of the container */
-    margin: 0; /* Remove any default margin */
-    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background to enhance visibility */
-    padding: 5px; /* Add padding for better readability */
-    text-align: center; /* Center-align the text within the link */
-}
+  
 <div class="popup" id="popup">
     <div class="popup-content">
         <span class="close" onclick="closePopup()">&times;</span>
