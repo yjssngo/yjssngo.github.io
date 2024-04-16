@@ -532,11 +532,43 @@
         .developer-info {
             margin-bottom: 20px;
         }
+		.language-selector {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.language-selector select {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.language-selector select:hover {
+  border-color: #007bff;
+}
+
+.language-selector select:focus {
+  outline: none;
+  border-color: #007bff;
+}
     </style>
     
 </head>
 <body>
 <header>
+<div class="language-selector">
+  <select onchange="changeLanguage(this.value)">
+    <option value="english">English</option>
+    <option value="hindi">हिंदी</option>
+    <option value="spanish">Español</option>
+    <!-- Add more language options as needed -->
+  </select>
+</div>
+
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
         <a href="#about">About Us</a>
