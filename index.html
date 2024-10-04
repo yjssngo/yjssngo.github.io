@@ -1138,6 +1138,42 @@ window.onload = function() {
 		
     </section>
 
+<div>
+<p>Today's Visits (This Device): <span id="todaysVisits"></span></p>
+<p>Unique Visits (This Device): <span id="uniqueVisits"></span></p>
+<p>Total Visits (This Device): <span id="totalVisits"></span></p>   
+</div>
+	<script>
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+
+    // Initialize total visit counter in LocalStorage if it doesn't exist
+    let totalVisits = localStorage.getItem('totalVisits') || 0;
+    totalVisits++;
+    localStorage.setItem('totalVisits', totalVisits);
+
+    // Initialize unique visit flag in LocalStorage if not set
+    let uniqueVisits = localStorage.getItem('uniqueVisit') || false;
+    if (!uniqueVisits) {
+      uniqueVisits = 1;  // Mark as first unique visit
+      localStorage.setItem('uniqueVisit', uniqueVisits);
+    }
+
+    // Initialize today's visits in LocalStorage if it doesn't exist
+    let todayVisits = JSON.parse(localStorage.getItem('todayVisits')) || {};
+    if (todayVisits[today]) {
+      todayVisits[today]++;
+    } else {
+      todayVisits[today] = 1;
+    }
+    localStorage.setItem('todayVisits', JSON.stringify(todayVisits));
+
+    // Display the visit counts on the page
+    document.getElementById('totalVisits').innerText = totalVisits;
+    document.getElementById('uniqueVisits').innerText = uniqueVisits ? 1 : 0;
+    document.getElementById('todaysVisits').innerText = todayVisits[today];
+  </script>
+
     <footer>
     <div class="social-media">
         <!-- Add your social media icons and links here -->
