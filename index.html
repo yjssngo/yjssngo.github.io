@@ -713,7 +713,31 @@ a {
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmGjiHnCl0IvE34YV-6MlBnaxCm4MZZ5FzXPKqhg5qi5WWVg/viewform?usp=pp_url" target="_blank" class="popup-btn">Fill Membership Form</a>
     </div>
 </div>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // Speed of the counter animation (lower number = faster)
 
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');  // Get the target value
+                const count = +counter.innerText;  // Get the current count value (default 0)
+
+                const increment = target / speed;  // Increment value based on speed
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);  // Update counter value
+                    setTimeout(updateCount, 20);  // Repeat updateCount after a delay
+                } else {
+                    counter.innerText = target + "+";  // Ensure it ends with the target value
+                }
+            };
+
+            // Trigger the count-up animation
+            updateCount();
+        });
+    });
+	</script>
 <script>
 	const counters = document.querySelectorAll('.counter');
     const speed = 100; // Adjust the speed as per the requirement
