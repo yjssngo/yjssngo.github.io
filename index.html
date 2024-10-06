@@ -23,6 +23,58 @@
 	}
 	</script>
 	<style>
+		.testimonial {
+        text-align: center;
+        padding: 50px 0;
+        background-color: #f8f9fa;
+    }
+    
+    .counter-container {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        flex-wrap: wrap;
+    }
+
+    .counter-box {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 150px;
+        position: relative;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .counter-box:hover {
+        transform: translateY(-10px);
+    }
+
+    .counter {
+        font-size: 40px;
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    .counter-box p {
+        margin: 10px 0 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    /* Floating animation */
+    .counter-box {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
 	/* Popup styling for new form for the ngo membership registration get started*/
 .popup {
     display: none;
@@ -663,6 +715,26 @@ a {
 </div>
 
 <script>
+	const counters = document.querySelectorAll('.counter');
+    const speed = 100; // Adjust the speed as per the requirement
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 50);
+            } else {
+                counter.innerText = target + "+";
+            }
+        };
+
+        updateCount();
+    });
 function changeLanguage() {
   var languageSelect = document.getElementById("languageSelect");
   var selectedLanguage = languageSelect.value;
@@ -1033,8 +1105,29 @@ window.onload = function() {
     </section>
 
     <section id="testimonials">
-        <h2>Testimonials</h2>
-        <p>Upcoming...</p>
+<h2>Our Impact</h2>
+    <div class="counter-container">
+        <div class="counter-box">
+            <span class="counter" data-target="100">0</span>
+            <p>Active Members</p>
+        </div>
+        <div class="counter-box">
+            <span class="counter" data-target="50">0</span>
+            <p>Events Organized</p>
+        </div>
+        <div class="counter-box">
+            <span class="counter" data-target="10">0</span>
+            <p>Cities Reached</p>
+        </div>
+        <div class="counter-box">
+            <span class="counter" data-target="2000">0</span>
+            <p>People Made Aware</p>
+        </div>
+        <div class="counter-box">
+            <span class="counter" data-target="10">0</span>
+            <p>Donors</p>
+        </div>
+    </div>
     </section>
 
     <section id="join">
