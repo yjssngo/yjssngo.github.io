@@ -1276,14 +1276,24 @@ window.onload = function() {
   <!-- GitHub API Call to Get the Download Count -->
   <script>
     // Fetch release data from GitHub API
-    fetch('https://github.com/yjssngo/yjssngo.github.io/releases/download/v1.0/YJSS_V1.0.apk')
+    fetch('https://api.github.com/repos/yjssngo/yjss-app/releases')
       .then(response => response.json())
       .then(data => {
-        // Assume the APK is the first asset of the latest release
-        const downloadCount = data[0].assets[0].download_count;
+        if (data && data.length > 0) {
+          // Assume the APK is the first asset of the latest release
+          const release = data[0];
+          if (release.assets.length > 0) {
+            const apkAsset = release.assets[0];
+            const downloadCount = apkAsset.download_count;
 
-        // Update the HTML with the download count
-        document.getElementById('download-count').innerText = `Number of downloads: ${downloadCount}`;
+            // Update the HTML with the download count
+            document.getElementById('download-count').innerText = `Number of downloads: ${downloadCount}`;
+          } else {
+            document.getElementById('download-count').innerText = 'No APK found in the release.';
+          }
+        } else {
+          document.getElementById('download-count').innerText = 'No releases found.';
+        }
       })
       .catch(error => {
         console.error('Error fetching download count:', error);
