@@ -790,9 +790,10 @@ window.onload = function() {
 </script>
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
-        <a href="#about">About Us</a>
+        	<a href="#about">About Us</a>
 		<a href="#mission">Our Mission</a>
 		<a href="#team">Our Team</a>
+	    	<a href="#verify">Verify Member</a>
 		<a href="#events">Events</a>
 		<a href="#donate">Donate</a>
 		<a href="#media">Media Coverage</a>
@@ -958,6 +959,95 @@ window.onload = function() {
             }
         }
     </script>
+	<section id="verify">
+
+		<h1>Member Verification</h1>
+    <form id="verification-form">
+        <label for="memberId">Enter Your Unique ID:</label>
+        <input type="text" id="memberId" required>
+        <button type="submit">Verify</button>
+    </form>
+    <div id="status"></div>
+    <div id="download-links">
+        <h2>Download Your Documents:</h2>
+        <a id="certificateLink" href="#" target="_blank">Download Certificate</a><br>
+        <a id="receiptLink" href="#" target="_blank">Download Receipt</a>
+    </div>
+
+    <!-- Include PapaParse library for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script>
+        document.getElementById('verification-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            verifyMember();
+        });
+
+        function verifyMember() {
+            const memberId = document.getElementById('memberId').value;
+            const csvFilePath = './members.csv'; // Path to your CSV file
+
+            Papa.parse(csvFilePath, {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    const data = results.data;
+                    const member = data.find(member => member.Unique_ID === memberId);
+                    if (member) {
+                        document.getElementById('status').innerText = `Member is active: ${member.Name}`;
+                        
+                        // Generate download links for certificate and receipt
+                        const certificateLink = generateCertificate(member);
+                        const receiptLink = generateReceipt(member);
+                        
+                        document.getElementById('certificateLink').href = certificateLink;
+                        document.getElementById('receiptLink').href = receiptLink;
+                        document.getElementById('download-links').style.display = 'block';
+                    } else {
+                        document.getElementById('status').innerText = "Member not found.";
+                        document.getElementById('download-links').style.display = 'none';
+                    }
+                },
+                error: function(error) {
+                    document.getElementById('status').innerText = "Error loading CSV data.";
+                    console.error("Error:", error);
+                }
+            });
+        }
+
+        // Function to dynamically generate certificate based on member data
+        function generateCertificate(member) {
+            const template = `
+                <html>
+                    <head><title>Certificate</title></head>
+                    <body>
+                        <h1>Certificate of Membership</h1>
+                        <p>This certifies that <strong>${member.Name}</strong>, with unique ID <strong>${member.Unique_ID}</strong>, is a <strong>${member['Type of Membership']}</strong> for the year 2024.</p>
+                    </body>
+                </html>
+            `;
+            const blob = new Blob([template], { type: 'application/pdf' });
+            return URL.createObjectURL(blob); // Returns link to download certificate
+        }
+
+        // Function to dynamically generate receipt based on member data
+        function generateReceipt(member) {
+            const template = `
+                <html>
+                    <head><title>Receipt</title></head>
+                    <body>
+                        <h1>Payment Receipt</h1>
+                        <p>Received amount of <strong>${member.Amount}</strong> from <strong>${member.Name}</strong>, ID <strong>${member.Unique_ID}</strong>, for the membership type <strong>${member['Type of Membership']}</strong>.</p>
+                    </body>
+                </html>
+            `;
+            const blob = new Blob([template], { type: 'application/pdf' });
+            return URL.createObjectURL(blob); // Returns link to download receipt
+        }
+    </script>
+        
+    </section>
+	
     <section id="events">
 	<h2>Events</h2>
     <div class="events-containers">
