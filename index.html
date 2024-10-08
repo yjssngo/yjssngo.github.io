@@ -961,88 +961,124 @@ window.onload = function() {
     </script>
 	<section id="verify">
 
-		<h1>Member Verification</h1>
-    <form id="verification-form">
-        <label for="memberId">Enter Your Unique ID:</label>
-        <input type="text" id="memberId" required>
-        <button type="submit">Verify</button>
-    </form>
-    <div id="status"></div>
-    <div id="download-links">
-        <h2>Download Your Documents:</h2>
-        <a id="certificateLink" href="#" target="_blank">Download Certificate</a><br>
-        <a id="receiptLink" href="#" target="_blank">Download Receipt</a>
+		 <div class="form-container">
+        <h1>Verify Membership</h1>
+        <input type="text" id="uniqueIdInput" placeholder="Enter Unique ID" />
+        <button onclick="verifyMember()">Verify</button>
+
+        <div id="message"></div>
+
+        <div id="downloadOptions" style="display: none;">
+            <button class="btn" onclick="generateCertificate()">Download Certificate</button>
+            <button class="btn" onclick="generateReceipt()">Download Receipt</button>
+        </div>
     </div>
 
-    <!-- Include PapaParse library for CSV parsing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- Certificate template -->
+    <div id="certificate">
+        <h1>Certificate of Membership</h1>
+        <h2>Yuva Jankalyan Seva Sanstha</h2>
+        <p>This is to certify that</p>
+        <h2 id="certName"></h2> <!-- Dynamic Name -->
+        <p>with Unique ID: <strong id="certUniqueId"></strong></p> <!-- Dynamic Unique ID -->
+        <p>has been an active member for the year <strong id="certYear"></strong></p> <!-- Dynamic Year -->
+        <p>Date of Issue: <span id="certIssueDate"></span></p>
+    </div>
+
+    <!-- Receipt template -->
+    <div id="receipt">
+        <h1>Payment Receipt</h1>
+        <p>Received from: <strong id="recName"></strong></p> <!-- Dynamic Name -->
+        <p>Unique ID: <strong id="recUniqueId"></strong></p> <!-- Dynamic Unique ID -->
+        <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p> <!-- Dynamic Amount -->
+        <p>Membership Type: <strong id="recType"></strong></p> <!-- Dynamic Membership Type -->
+        <p>Date of Issue: <span id="recIssueDate"></span></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
     <script>
-        document.getElementById('verification-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-            verifyMember();
-        });
+        let membersData = [];
 
-        function verifyMember() {
-            const memberId = document.getElementById('memberId').value;
-            const csvFilePath = './members.csv'; // Path to your CSV file
+        // Load CSV and store member data in memory
+        fetch('./members.csv')
+            .then(response => response.text())
+            .then(data => {
+                membersData = parseCSV(data);
+            });
 
-            Papa.parse(csvFilePath, {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    const data = results.data;
-                    const member = data.find(member => member.Unique_ID === memberId);
-                    if (member) {
-                        document.getElementById('status').innerText = `Member is active: ${member.Name}`;
-                        
-                        // Generate download links for certificate and receipt
-                        const certificateLink = generateCertificate(member);
-                        const receiptLink = generateReceipt(member);
-                        
-                        document.getElementById('certificateLink').href = certificateLink;
-                        document.getElementById('receiptLink').href = receiptLink;
-                        document.getElementById('download-links').style.display = 'block';
-                    } else {
-                        document.getElementById('status').innerText = "Member not found.";
-                        document.getElementById('download-links').style.display = 'none';
-                    }
-                },
-                error: function(error) {
-                    document.getElementById('status').innerText = "Error loading CSV data.";
-                    console.error("Error:", error);
-                }
+        // Function to parse CSV data into array of objects
+        function parseCSV(data) {
+            const rows = data.split("\n");
+            const headers = rows[0].split(",");
+
+            return rows.slice(1).map(row => {
+                const values = row.split(",");
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header.trim()] = values[index].trim();
+                });
+                return obj;
             });
         }
 
-        // Function to dynamically generate certificate based on member data
-        function generateCertificate(member) {
-            const template = `
-                <html>
-                    <head><title>Certificate</title></head>
-                    <body>
-                        <h1>Certificate of Membership</h1>
-                        <p>This certifies that <strong>${member.Name}</strong>, with unique ID <strong>${member.Unique_ID}</strong>, is a <strong>${member['Type of Membership']}</strong> for the year 2024.</p>
-                    </body>
-                </html>
-            `;
-            const blob = new Blob([template], { type: 'application/pdf' });
-            return URL.createObjectURL(blob); // Returns link to download certificate
+        // Member Verification Logic
+        function verifyMember() {
+            const uniqueId = document.getElementById('uniqueIdInput').value.trim();
+            const member = membersData.find(m => m.Unique_ID === uniqueId);
+
+            const message = document.getElementById('message');
+            const downloadOptions = document.getElementById('downloadOptions');
+
+            if (member) {
+                message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member.Name}`;
+                downloadOptions.style.display = 'block';
+                
+                // Set member data for further use
+                sessionStorage.setItem('verifiedMember', JSON.stringify(member));
+            } else {
+                message.innerHTML = "<strong>Member Not Found!</strong>";
+                downloadOptions.style.display = 'none';
+            }
         }
 
-        // Function to dynamically generate receipt based on member data
-        function generateReceipt(member) {
-            const template = `
-                <html>
-                    <head><title>Receipt</title></head>
-                    <body>
-                        <h1>Payment Receipt</h1>
-                        <p>Received amount of <strong>${member.Amount}</strong> from <strong>${member.Name}</strong>, ID <strong>${member.Unique_ID}</strong>, for the membership type <strong>${member['Type of Membership']}</strong>.</p>
-                    </body>
-                </html>
-            `;
-            const blob = new Blob([template], { type: 'application/pdf' });
-            return URL.createObjectURL(blob); // Returns link to download receipt
+        // Certificate Generation Logic
+        function generateCertificate() {
+            const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+            if (!member) return;
+
+            document.getElementById('certName').innerText = member.Name;
+            document.getElementById('certUniqueId').innerText = member.Unique_ID;
+            document.getElementById('certYear').innerText = new Date().getFullYear();
+            document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
+
+            const certificate = document.getElementById('certificate');
+            certificate.style.display = 'block'; // Show certificate for PDF generation
+
+            // Convert certificate to PDF
+            html2pdf().from(certificate).save('membership_certificate.pdf').then(() => {
+                certificate.style.display = 'none'; // Hide after generating
+            });
+        }
+
+        // Receipt Generation Logic
+        function generateReceipt() {
+            const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+            if (!member) return;
+
+            document.getElementById('recName').innerText = member.Name;
+            document.getElementById('recUniqueId').innerText = member.Unique_ID;
+            document.getElementById('recAmount').innerText = member.Amount;
+            document.getElementById('recType').innerText = member['Type of Membership'];
+            document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
+
+            const receipt = document.getElementById('receipt');
+            receipt.style.display = 'block'; // Show receipt for PDF generation
+
+            // Convert receipt to PDF
+            html2pdf().from(receipt).save('payment_receipt.pdf').then(() => {
+                receipt.style.display = 'none'; // Hide after generating
+            });
         }
     </script>
         
