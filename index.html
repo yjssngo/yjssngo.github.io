@@ -1270,6 +1270,26 @@ window.onload = function() {
         </a>
 				
 </section>
+	<!-- Placeholder for download count -->
+  <p id="download-count">Number of downloads: Loading...</p>
+
+  <!-- GitHub API Call to Get the Download Count -->
+  <script>
+    // Fetch release data from GitHub API
+    fetch('https://github.com/yjssngo/yjssngo.github.io/releases/download/v1.0/YJSS_V1.0.apk')
+      .then(response => response.json())
+      .then(data => {
+        // Assume the APK is the first asset of the latest release
+        const downloadCount = data[0].assets[0].download_count;
+
+        // Update the HTML with the download count
+        document.getElementById('download-count').innerText = `Number of downloads: ${downloadCount}`;
+      })
+      .catch(error => {
+        console.error('Error fetching download count:', error);
+        document.getElementById('download-count').innerText = 'Unable to load download count.';
+      });
+  </script>
 <div>
 <h2>Total Page Count</h2>	
 </div>
