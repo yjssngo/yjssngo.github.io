@@ -996,8 +996,7 @@ window.onload = function() {
     <!-- Certificate template -->
     <div id="certificate">
         <h1>Certificate of Membership</h1>
-        <h2>युवा जनकल्याण सेवा संस्था</h2>
-    	<h3>शिक्षित बनो, सशक्त बनो</h3>
+        <h2>Yuva Jankalyan Seva Sanstha</h2>
         <p>This is to certify that</p>
         <h2 id="certName"></h2> <!-- Dynamic Name -->
         <p>with Unique ID: <strong id="certUniqueId"></strong></p> <!-- Dynamic Unique ID -->
@@ -1021,7 +1020,7 @@ window.onload = function() {
         let membersData = [];
 
         // Load CSV and store member data in memory
-        fetch('members.csv') // Ensure the CSV file is in the same directory
+        fetch('https://yjssngo.github.io/members.csv') // Use the correct path to your CSV on GitHub Pages
             .then(response => response.text())
             .then(data => {
                 membersData = parseCSV(data);
@@ -1036,7 +1035,7 @@ window.onload = function() {
                 const values = row.split(",");
                 const obj = {};
                 headers.forEach((header, index) => {
-                    obj[header.trim()] = values[index].trim();
+                    obj[header.trim()] = values[index] ? values[index].trim() : '';
                 });
                 return obj;
             });
@@ -1045,13 +1044,13 @@ window.onload = function() {
         // Member Verification Logic
         function verifyMember() {
             const uniqueId = document.getElementById('uniqueIdInput').value.trim();
-            const member = membersData.find(m => m.Unique_ID === uniqueId);
+            const member = membersData.find(m => m['Unique_ID'] === uniqueId); // Adjust column name
 
             const message = document.getElementById('message');
             const downloadOptions = document.getElementById('downloadOptions');
 
             if (member) {
-                message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member.Name}`;
+                message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
                 downloadOptions.style.display = 'block';
                 
                 // Set member data for further use
@@ -1067,8 +1066,8 @@ window.onload = function() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
 
-            document.getElementById('certName').innerText = member.Name;
-            document.getElementById('certUniqueId').innerText = member.Unique_ID;
+            document.getElementById('certName').innerText = member['Name'];
+            document.getElementById('certUniqueId').innerText = member['Unique_ID'];
             document.getElementById('certYear').innerText = new Date().getFullYear();
             document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
 
@@ -1086,9 +1085,9 @@ window.onload = function() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
 
-            document.getElementById('recName').innerText = member.Name;
-            document.getElementById('recUniqueId').innerText = member.Unique_ID;
-            document.getElementById('recAmount').innerText = member.Amount;
+            document.getElementById('recName').innerText = member['Name'];
+            document.getElementById('recUniqueId').innerText = member['Unique_ID'];
+            document.getElementById('recAmount').innerText = member['Amount'];
             document.getElementById('recType').innerText = member['Type of Membership'];
             document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
 
