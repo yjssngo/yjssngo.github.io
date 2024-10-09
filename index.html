@@ -1021,7 +1021,7 @@ window.onload = function() {
         let membersData = [];
 
         // Load CSV and store member data in memory
-        fetch('./members.csv') // Ensure the CSV file is in the same directory
+        fetch('members.csv') // Ensure the CSV file is in the same directory
             .then(response => response.text())
             .then(data => {
                 membersData = parseCSV(data);
