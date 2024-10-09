@@ -23,15 +23,7 @@
 	}
 	</script>
 	<style>
-        #certificate, #receipt {
-            display: none; /* Hidden until member is verified */
-            border: 2px solid black;
-            padding: 20px;
-            width: 600px;
-            text-align: center;
-            margin: 20px auto;
-        }
-
+        /* Main container styles */
         .form-container {
             text-align: center;
             margin: 20px;
@@ -39,6 +31,70 @@
 
         .btn {
             margin: 10px;
+        }
+
+        /* Certificate & Receipt styling */
+        #certificate, #receipt {
+            display: none; /* Hidden until member is verified */
+            position: relative;
+            width: 600px;
+            height: 850px;
+            border: 5px solid #4a90e2;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            background-color: #fff;
+        }
+
+        /* Background logo for certificate & receipt */
+        .background-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Header logo */
+        .header-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Decorative line */
+        .decorative-line {
+            width: 80%;
+            height: 3px;
+            background-color: #4a90e2;
+            margin: 20px auto;
+        }
+
+        /* Outer border for the entire certificate & receipt */
+        .outer-border {
+            border: 8px double #4a90e2;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        /* Text alignment for certificate & receipt content */
+        #certificate h1, #receipt h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #certificate h2, #receipt h2 {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        #certificate p, #receipt p {
+            font-size: 16px;
+            margin-bottom: 8px;
         }
     </style>
 	<style>
@@ -994,10 +1050,12 @@ window.onload = function() {
     </div>
 
     <!-- Certificate template -->
-    <div id="certificate">
+    <div id="certificate" class="outer-border">
+        <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
+        <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
         <h1>Certificate of Membership</h1>
-        <h2>युवा जनकल्याण सेवा संस्था</h2>
-    	<h3>शिक्षित बनो, सशक्त बनो</h3>
+        <h2>Yuva Jankalyan Seva Sanstha</h2>
+        <div class="decorative-line"></div>
         <p>This is to certify that</p>
         <h2 id="certName"></h2> <!-- Dynamic Name -->
         <p>with Unique ID: <strong id="certUniqueId"></strong></p> <!-- Dynamic Unique ID -->
@@ -1006,8 +1064,11 @@ window.onload = function() {
     </div>
 
     <!-- Receipt template -->
-    <div id="receipt">
+    <div id="receipt" class="outer-border">
+        <img src="cover_logo.png" alt="Background Logo" class="background-logo">
+        <img src="main_logo.png" alt="Header Logo" class="header-logo">
         <h1>Payment Receipt</h1>
+        <div class="decorative-line"></div>
         <p>Received from: <strong id="recName"></strong></p> <!-- Dynamic Name -->
         <p>Unique ID: <strong id="recUniqueId"></strong></p> <!-- Dynamic Unique ID -->
         <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p> <!-- Dynamic Amount -->
@@ -1021,13 +1082,12 @@ window.onload = function() {
         let membersData = [];
 
         // Load CSV and store member data in memory
-        fetch('https://yjssngo.github.io/members.csv') // Use the correct path to your CSV on GitHub Pages
+        fetch('https://yjssngo.github.io/members.csv') // Correct CSV path
             .then(response => response.text())
             .then(data => {
                 membersData = parseCSV(data);
             });
 
-        // Function to parse CSV data into array of objects
         function parseCSV(data) {
             const rows = data.split("\n");
             const headers = rows[0].split(",");
@@ -1042,10 +1102,9 @@ window.onload = function() {
             });
         }
 
-        // Member Verification Logic
         function verifyMember() {
             const uniqueId = document.getElementById('uniqueIdInput').value.trim();
-            const member = membersData.find(m => m['Unique_ID'] === uniqueId); // Adjust column name
+            const member = membersData.find(m => m['Unique_ID'] === uniqueId);
 
             const message = document.getElementById('message');
             const downloadOptions = document.getElementById('downloadOptions');
@@ -1053,8 +1112,7 @@ window.onload = function() {
             if (member) {
                 message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
                 downloadOptions.style.display = 'block';
-                
-                // Set member data for further use
+
                 sessionStorage.setItem('verifiedMember', JSON.stringify(member));
             } else {
                 message.innerHTML = "<strong>Member Not Found!</strong>";
@@ -1062,7 +1120,6 @@ window.onload = function() {
             }
         }
 
-        // Certificate Generation Logic
         function generateCertificate() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
@@ -1073,15 +1130,13 @@ window.onload = function() {
             document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
 
             const certificate = document.getElementById('certificate');
-            certificate.style.display = 'block'; // Show certificate for PDF generation
+            certificate.style.display = 'block';
 
-            // Convert certificate to PDF
             html2pdf().from(certificate).save('membership_certificate.pdf').then(() => {
-                certificate.style.display = 'none'; // Hide after generating
+                certificate.style.display = 'none';
             });
         }
 
-        // Receipt Generation Logic
         function generateReceipt() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
@@ -1093,11 +1148,10 @@ window.onload = function() {
             document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
 
             const receipt = document.getElementById('receipt');
-            receipt.style.display = 'block'; // Show receipt for PDF generation
+            receipt.style.display = 'block';
 
-            // Convert receipt to PDF
             html2pdf().from(receipt).save('payment_receipt.pdf').then(() => {
-                receipt.style.display = 'none'; // Hide after generating
+                receipt.style.display = 'none';
             });
         }
     </script>
