@@ -22,20 +22,17 @@
 		popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
 	}
 	</script>
-	<style>
-        /* Main container styles */
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
         .form-container {
             text-align: center;
             margin: 20px;
         }
-
         .btn {
             margin: 10px;
         }
-
-        /* Certificate & Receipt styling */
         #certificate, #receipt {
-            display: none; /* Hidden until member is verified */
+            display: none;
             position: relative;
             width: 600px;
             height: 850px;
@@ -45,8 +42,6 @@
             margin: 20px auto;
             background-color: #fff;
         }
-
-        /* Background logo for certificate & receipt */
         .background-logo {
             position: absolute;
             top: 50%;
@@ -56,45 +51,21 @@
             opacity: 0.1;
             transform: translate(-50%, -50%);
         }
-
-        /* Header logo */
         .header-logo {
             width: 100px;
             height: auto;
             margin-bottom: 10px;
         }
-
-        /* Decorative line */
         .decorative-line {
             width: 80%;
             height: 3px;
             background-color: #4a90e2;
             margin: 20px auto;
         }
-
-        /* Outer border for the entire certificate & receipt */
         .outer-border {
             border: 8px double #4a90e2;
             padding: 10px;
             margin: 10px;
-        }
-
-        /* Text alignment for certificate & receipt content */
-        #certificate h1, #receipt h1 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        #certificate h2, #receipt h2 {
-            font-size: 18px;
-            font-weight: normal;
-            margin-bottom: 10px;
-        }
-
-        #certificate p, #receipt p {
-            font-size: 16px;
-            margin-bottom: 8px;
         }
     </style>
 	<style>
@@ -1043,38 +1014,40 @@ window.onload = function() {
 
         <div id="message"></div>
 
-        <div id="downloadOptions" style="display: none;">
-            <button class="btn" onclick="generateCertificate()">Download Certificate</button>
-            <button class="btn" onclick="generateReceipt()">Download Receipt</button>
+        <div id="viewOptions" style="display: none;">
+            <button class="btn" onclick="showCertificate()">View Certificate</button>
+            <button class="btn" onclick="showReceipt()">View Receipt</button>
         </div>
-    </div>
 
-    <!-- Certificate template -->
-    <div id="certificate" class="outer-border">
-        <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
-        <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
-        <h1>Certificate of Membership</h1>
-        <h1>युवा जनकल्याण सेवा संस्था</h1>
-    	<h2>शिक्षित बनो, सशक्त बनो</h2>
-        <div class="decorative-line"></div>
-        <p>This is to certify that</p>
-        <h2 id="certName"></h2> <!-- Dynamic Name -->
-        <p>with Unique ID: <strong id="certUniqueId"></strong></p> <!-- Dynamic Unique ID -->
-        <p>has been an active member for the year <strong id="certYear"></strong></p> <!-- Dynamic Year -->
-        <p>Date of Issue: <span id="certIssueDate"></span></p>
-    </div>
+        <div id="certificate" class="outer-border">
+            <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
+            <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
+            <h1>Certificate of Membership</h1>
+            <h2>युवा जनकल्याण सेवा संस्था</h2>
+            <h2>शिक्षित बनो, सशक्त बनो</h2>
+            <div class="decorative-line"></div>
+            <p>This is to certify that</p>
+            <h2 id="certName"></h2>
+            <p>with Unique ID: <strong id="certUniqueId"></strong></p>
+            <p>has been an active member for the year <strong id="certYear"></strong></p>
+            <p>Date of Issue: <span id="certIssueDate"></span></p>
+            <button class="btn" onclick="downloadCertificate()">Download Certificate</button>
+            <button class="btn" onclick="cancel()">Cancel</button>
+        </div>
 
-    <!-- Receipt template -->
-    <div id="receipt" class="outer-border">
-        <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
-        <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
-        <h1>Payment Receipt</h1>
-        <div class="decorative-line"></div>
-        <p>Received from: <strong id="recName"></strong></p> <!-- Dynamic Name -->
-        <p>Unique ID: <strong id="recUniqueId"></strong></p> <!-- Dynamic Unique ID -->
-        <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p> <!-- Dynamic Amount -->
-        <p>Membership Type: <strong id="recType"></strong></p> <!-- Dynamic Membership Type -->
-        <p>Date of Issue: <span id="recIssueDate"></span></p>
+        <div id="receipt" class="outer-border">
+            <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
+            <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
+            <h1>Payment Receipt</h1>
+            <div class="decorative-line"></div>
+            <p>Received from: <strong id="recName"></strong></p>
+            <p>Unique ID: <strong id="recUniqueId"></strong></p>
+            <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p>
+            <p>Membership Type: <strong id="recType"></strong></p>
+            <p>Date of Issue: <span id="recIssueDate"></span></p>
+            <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
+            <button class="btn" onclick="cancel()">Cancel</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
@@ -1083,7 +1056,7 @@ window.onload = function() {
         let membersData = [];
 
         // Load CSV and store member data in memory
-        fetch('https://yjssngo.github.io/members.csv') // Correct CSV path
+        fetch('https://yjssngo.github.io/members.csv')
             .then(response => response.text())
             .then(data => {
                 membersData = parseCSV(data);
@@ -1108,20 +1081,20 @@ window.onload = function() {
             const member = membersData.find(m => m['Unique_ID'] === uniqueId);
 
             const message = document.getElementById('message');
-            const downloadOptions = document.getElementById('downloadOptions');
+            const viewOptions = document.getElementById('viewOptions');
 
             if (member) {
                 message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
-                downloadOptions.style.display = 'block';
+                viewOptions.style.display = 'block';
 
                 sessionStorage.setItem('verifiedMember', JSON.stringify(member));
             } else {
                 message.innerHTML = "<strong>Member Not Found!</strong>";
-                downloadOptions.style.display = 'none';
+                viewOptions.style.display = 'none';
             }
         }
 
-        function generateCertificate() {
+        function showCertificate() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
 
@@ -1132,13 +1105,9 @@ window.onload = function() {
 
             const certificate = document.getElementById('certificate');
             certificate.style.display = 'block';
-
-            html2pdf().from(certificate).save('membership_certificate.pdf').then(() => {
-                certificate.style.display = 'none';
-            });
         }
 
-        function generateReceipt() {
+        function showReceipt() {
             const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
             if (!member) return;
 
@@ -1150,10 +1119,21 @@ window.onload = function() {
 
             const receipt = document.getElementById('receipt');
             receipt.style.display = 'block';
+        }
 
-            html2pdf().from(receipt).save('payment_receipt.pdf').then(() => {
-                receipt.style.display = 'none';
-            });
+        function downloadCertificate() {
+            const certificate = document.getElementById('certificate');
+            html2pdf().from(certificate).save('membership_certificate.pdf');
+        }
+
+        function downloadReceipt() {
+            const receipt = document.getElementById('receipt');
+            html2pdf().from(receipt).save('payment_receipt.pdf');
+        }
+
+        function cancel() {
+            document.getElementById('certificate').style.display = 'none';
+            document.getElementById('receipt').style.display = 'none';
         }
     </script>
         
