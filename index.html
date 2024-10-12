@@ -11,22 +11,17 @@
 	<nav class="main-nav">
 		<!-- Your regular navigation items go here -->
 	</nav>
-<script>
-	
+
+<style>
 	function toggleMenu() {
 		var nav = document.querySelector('.main-nav');
 		nav.classList.toggle('show-menu');
 	}
-	</script>
-	<script>
 	function openMediaPopup(imageSrc) {
 		var popup = window.open('', '_blank');
 		popup.document.write('<img src="' + imageSrc + '" style="max-width: 100%; max-height: 100%;">');
 	}
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        .form-container {
+	 .form-container {
             text-align: center;
             margin: 20px;
         }
@@ -69,9 +64,7 @@
             padding: 10px;
             margin: 10px;
         }
-    </style>
-	<style>
-		.testimonial {
+	.testimonial {
         text-align: center;
         padding: 50px 0;
         background-color: #f8f9fa;
@@ -822,82 +815,9 @@ a {
     font-weight: bold;
     cursor: pointer;
 }
+	   
     </style>
-    <style>
-	    /* Media Coverage Section Styling */
-#media {
-    text-align: center;
-    padding: 20px;
-}
 
-.media-outlets {
-    display: flex;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: scrollMedia 20s linear infinite;
-}
-
-.media-items {
-    display: inline-block;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.media-items img {
-    width: 200px;
-    height: auto;
-    border: 2px solid #000;
-    transition: transform 0.2s;
-}
-
-.media-items:hover img {
-    transform: scale(1.1);
-}
-
-/* Popup Styles */
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    position: relative;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.popup-content img {
-    max-width: 100%;
-    max-height: 80vh;
-}
-
-.popup .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Animation for scrolling the media */
-@keyframes scrollMedia {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-    </style>
 </head>
 <body>
 <header>
@@ -911,7 +831,11 @@ a {
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmGjiHnCl0IvE34YV-6MlBnaxCm4MZZ5FzXPKqhg5qi5WWVg/viewform?usp=pp_url" target="_blank" class="popup-btn">Fill Membership Form</a>
     </div>
 </div>
-	
+<!-- Best Practice to use Single <script> tag for all JavaScript between body tag-->	
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>-->
+<script src="./xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
         const counters = document.querySelectorAll('.counter');
@@ -936,8 +860,6 @@ a {
             updateCount();
         });
     });
-	</script>
-<script>
 	const counters = document.querySelectorAll('.counter');
     const speed = 100; // Adjust the speed as per the requirement
 
@@ -1006,7 +928,7 @@ function closePopup() {
     var popup = document.getElementById('popup');
     popup.style.display = 'none';
 }
-	<script>
+	
 function openPopup(imageSrc) {
     var popup = document.getElementById('popup');
     var popupImage = document.getElementById('popup-image');
@@ -1028,6 +950,238 @@ function closePopup() {
 function closePopup() {
     const popup = document.getElementById('popup');
     popup.style.display = 'none';
+}
+const teamContainer = document.getElementById('teamContainer');
+        const teamMembers = document.querySelectorAll('.team-member');
+
+        let moveAmount = 0;
+        let moveInterval = setInterval(moveTeam, 2000); // Adjust speed as needed
+
+        function moveTeam() {
+            moveAmount -= 170; // Adjust based on member width and margin-right
+            teamContainer.style.transform = `translateX(${moveAmount}px)`;
+            if (moveAmount <= -170 * teamMembers.length) {
+                moveAmount = 0;
+                setTimeout(() => {
+                    teamContainer.style.transition = 'none';
+                    teamContainer.style.transform = `translateX(0)`;
+                    setTimeout(() => {
+                        teamContainer.style.transition = 'transform 1s ease-in-out';
+                    }, 50);
+                }, 1000);
+            }
+        }
+
+	let membersData = [];
+
+    // Load CSV and store member data in memory
+    fetch('https://yjssngo.github.io/members.csv') // Correct CSV path
+        .then(response => response.text())
+        .then(data => {
+            membersData = parseCSV(data);
+        });
+
+    function parseCSV(data) {
+        const rows = data.split("\n");
+        const headers = rows[0].split(",");
+        return rows.slice(1).map(row => {
+            const values = row.split(",");
+            const obj = {};
+            headers.forEach((header, index) => {
+                obj[header.trim()] = values[index] ? values[index].trim() : '';
+            });
+            return obj;
+        });
+    }
+
+    function verifyMember() {
+        const uniqueId = document.getElementById('uniqueIdInput').value.trim();
+        const member = membersData.find(m => m['Unique_ID'] === uniqueId);
+
+        const message = document.getElementById('message');
+        const viewOptions = document.getElementById('viewOptions');
+        const actionOptions = document.getElementById('actionOptions');
+
+        if (member) {
+            message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
+            viewOptions.style.display = 'block';
+
+            sessionStorage.setItem('verifiedMember', JSON.stringify(member));
+        } else {
+            message.innerHTML = "<strong>Member Not Found!</strong>";
+            viewOptions.style.display = 'none';
+            actionOptions.style.display = 'none';
+        }
+    }
+
+    function viewCertificate() {
+        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+        if (!member) return;
+
+        document.getElementById('certName').innerText = member['Name'];
+        document.getElementById('certUniqueId').innerText = member['Unique_ID'];
+        document.getElementById('certYear').innerText = new Date().getFullYear();
+        document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
+
+        document.getElementById('certificate').style.display = 'block';
+        document.getElementById('actionOptions').style.display = 'block';
+        document.getElementById('viewOptions').style.display = 'none';
+    }
+
+    function viewReceipt() {
+        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+        if (!member) return;
+
+        document.getElementById('recName').innerText = member['Name'];
+        document.getElementById('recUniqueId').innerText = member['Unique_ID'];
+        document.getElementById('recAmount').innerText = member['Amount'];
+        document.getElementById('recType').innerText = member['Type of Membership'];
+        document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
+
+        document.getElementById('receipt').style.display = 'block';
+        document.getElementById('actionOptions').style.display = 'block';
+        document.getElementById('viewOptions').style.display = 'none';
+    }
+
+    function cancelView() {
+        document.getElementById('certificate').style.display = 'none';
+        document.getElementById('receipt').style.display = 'none';
+        document.getElementById('actionOptions').style.display = 'none';
+        document.getElementById('viewOptions').style.display = 'block';
+    }
+
+    function downloadCertificate() {
+        const certificate = document.getElementById('certificate');
+        html2pdf().from(certificate).save('membership_certificate.pdf');
+    }
+
+    function downloadReceipt() {
+        const receipt = document.getElementById('receipt');
+        html2pdf().from(receipt).save('payment_receipt.pdf');
+    }
+	async function fetchData() {
+            const response = await fetch('./AnnualMemebers.xlsx');
+            const data = await response.arrayBuffer();
+            return new Uint8Array(data);
+        }
+
+        async function parseExcel() {
+            const data = await fetchData();
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            return XLSX.utils.sheet_to_json(sheet);
+        }
+
+        function populateTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // Clear previous data
+
+            data.forEach(row => {
+                const newRow = document.createElement('tr');
+                Object.values(row).forEach(value => {
+                    const newCell = document.createElement('td');
+                    newCell.textContent = value;
+                    newRow.appendChild(newCell);
+                });
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        async function init() {
+            const excelData = await parseExcel();
+            populateTable(excelData);
+        }
+
+        init();
+	function openPopup(imageSrc) {
+    var popup = document.getElementById("popup");
+    var popupImage = document.getElementById("popup-image");
+    popupImage.src = imageSrc;
+    popup.style.display = "block";
+}
+
+function closePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
+function toggleMenu() {
+    var x = document.getElementById("navbar");
+    if (x.className === "navbar-container") {
+        x.className += " responsive";
+    } else {
+        x.className = "navbar-container";
+    }
+}
+<!-- Placeholder for download count -->
+  <!-- GitHub API Call to Get the Download Count -->
+  
+    // Fetch release data from GitHub API
+    fetch('https://api.github.com/repos/yjssngo/yjssngo.github.io/releases')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          // Assume the APK is the first asset of the latest release
+          const release = data[0];
+          if (release.assets.length > 0) {
+            const apkAsset = release.assets[0];
+            const downloadCount = apkAsset.download_count;
+
+            // Update the HTML with the download count
+            document.getElementById('download-count').innerText = `Number of downloads: ${downloadCount}`;
+          } else {
+            document.getElementById('download-count').innerText = 'No APK found in the release.';
+          }
+        } else {
+          document.getElementById('download-count').innerText = 'No releases found.';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching download count:', error);
+        document.getElementById('download-count').innerText = 'Unable to load download count.';
+      });
+
+function toggleMenu() {
+    var navbar = document.getElementById("navbar");
+    if (navbar.className === "navbar-container") {
+        navbar.className += " responsive";
+    } else {
+        navbar.className = "navbar-container";
+    }
+}
+
+function openPopup(imageSrc) {
+    var popup = document.getElementById("popup");
+    var popupImage = document.getElementById("popup-image");
+    popupImage.src = imageSrc;
+    popup.style.display = "block";
+}
+
+function closePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
+
+// Show the pop-up if it hasn't been dismissed for 30 days
+window.onload = function() {
+    var membershipPopup = document.getElementById("membershipPopup");
+    
+    // Check if the popup has been shown within the last 30 days
+    var popupShown = localStorage.getItem('popupShown');
+    var now = new Date().getTime();
+    
+    if (!popupShown || (now - popupShown) > 30*24*60*60*1000) {
+        membershipPopup.style.display = "flex";
+    }
+}
+
+// Function to close the popup
+function closePopup() {
+    var membershipPopup = document.getElementById("membershipPopup");
+    membershipPopup.style.display = "none";
+    
+    // Record the time when the popup was closed
+    localStorage.setItem('popupShown', new Date().getTime());
 }
 
 </script>
@@ -1181,28 +1335,7 @@ function closePopup() {
 			
 			</div>
     </section>
-	<script>
-        const teamContainer = document.getElementById('teamContainer');
-        const teamMembers = document.querySelectorAll('.team-member');
-
-        let moveAmount = 0;
-        let moveInterval = setInterval(moveTeam, 2000); // Adjust speed as needed
-
-        function moveTeam() {
-            moveAmount -= 170; // Adjust based on member width and margin-right
-            teamContainer.style.transform = `translateX(${moveAmount}px)`;
-            if (moveAmount <= -170 * teamMembers.length) {
-                moveAmount = 0;
-                setTimeout(() => {
-                    teamContainer.style.transition = 'none';
-                    teamContainer.style.transform = `translateX(0)`;
-                    setTimeout(() => {
-                        teamContainer.style.transition = 'transform 1s ease-in-out';
-                    }, 50);
-                }, 1000);
-            }
-        }
-    </script>
+	
 	<section id="verify">
 
 	 <div class="form-container">
@@ -1254,97 +1387,9 @@ function closePopup() {
     <p>Date of Issue: <span id="recIssueDate"></span></p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
-<script>
-    let membersData = [];
 
-    // Load CSV and store member data in memory
-    fetch('https://yjssngo.github.io/members.csv') // Correct CSV path
-        .then(response => response.text())
-        .then(data => {
-            membersData = parseCSV(data);
-        });
 
-    function parseCSV(data) {
-        const rows = data.split("\n");
-        const headers = rows[0].split(",");
-        return rows.slice(1).map(row => {
-            const values = row.split(",");
-            const obj = {};
-            headers.forEach((header, index) => {
-                obj[header.trim()] = values[index] ? values[index].trim() : '';
-            });
-            return obj;
-        });
-    }
-
-    function verifyMember() {
-        const uniqueId = document.getElementById('uniqueIdInput').value.trim();
-        const member = membersData.find(m => m['Unique_ID'] === uniqueId);
-
-        const message = document.getElementById('message');
-        const viewOptions = document.getElementById('viewOptions');
-        const actionOptions = document.getElementById('actionOptions');
-
-        if (member) {
-            message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
-            viewOptions.style.display = 'block';
-
-            sessionStorage.setItem('verifiedMember', JSON.stringify(member));
-        } else {
-            message.innerHTML = "<strong>Member Not Found!</strong>";
-            viewOptions.style.display = 'none';
-            actionOptions.style.display = 'none';
-        }
-    }
-
-    function viewCertificate() {
-        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
-        if (!member) return;
-
-        document.getElementById('certName').innerText = member['Name'];
-        document.getElementById('certUniqueId').innerText = member['Unique_ID'];
-        document.getElementById('certYear').innerText = new Date().getFullYear();
-        document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
-
-        document.getElementById('certificate').style.display = 'block';
-        document.getElementById('actionOptions').style.display = 'block';
-        document.getElementById('viewOptions').style.display = 'none';
-    }
-
-    function viewReceipt() {
-        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
-        if (!member) return;
-
-        document.getElementById('recName').innerText = member['Name'];
-        document.getElementById('recUniqueId').innerText = member['Unique_ID'];
-        document.getElementById('recAmount').innerText = member['Amount'];
-        document.getElementById('recType').innerText = member['Type of Membership'];
-        document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
-
-        document.getElementById('receipt').style.display = 'block';
-        document.getElementById('actionOptions').style.display = 'block';
-        document.getElementById('viewOptions').style.display = 'none';
-    }
-
-    function cancelView() {
-        document.getElementById('certificate').style.display = 'none';
-        document.getElementById('receipt').style.display = 'none';
-        document.getElementById('actionOptions').style.display = 'none';
-        document.getElementById('viewOptions').style.display = 'block';
-    }
-
-    function downloadCertificate() {
-        const certificate = document.getElementById('certificate');
-        html2pdf().from(certificate).save('membership_certificate.pdf');
-    }
-
-    function downloadReceipt() {
-        const receipt = document.getElementById('receipt');
-        html2pdf().from(receipt).save('payment_receipt.pdf');
-    }
-</script>
         
     </section>
 	
@@ -1594,47 +1639,6 @@ function closePopup() {
         </table>
     </div>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>-->
-	<script src="./xlsx.full.min.js"></script>
-    <script>
-        async function fetchData() {
-            const response = await fetch('./AnnualMemebers.xlsx');
-            const data = await response.arrayBuffer();
-            return new Uint8Array(data);
-        }
-
-        async function parseExcel() {
-            const data = await fetchData();
-            const workbook = XLSX.read(data, { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
-            return XLSX.utils.sheet_to_json(sheet);
-        }
-
-        function populateTable(data) {
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = ''; // Clear previous data
-
-            data.forEach(row => {
-                const newRow = document.createElement('tr');
-                Object.values(row).forEach(value => {
-                    const newCell = document.createElement('td');
-                    newCell.textContent = value;
-                    newRow.appendChild(newCell);
-                });
-                tableBody.appendChild(newRow);
-            });
-        }
-
-        async function init() {
-            const excelData = await parseExcel();
-            populateTable(excelData);
-        }
-
-        init();
-    </script>
-	    
-	
     </section>
 	
 	<section id="contact">
@@ -1655,36 +1659,7 @@ function closePopup() {
 		<p id="download-count">Number of downloads: Loading...</p>
 				
 </section>
-	<!-- Placeholder for download count -->
-  
-
-  <!-- GitHub API Call to Get the Download Count -->
-  <script>
-    // Fetch release data from GitHub API
-    fetch('https://api.github.com/repos/yjssngo/yjssngo.github.io/releases')
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.length > 0) {
-          // Assume the APK is the first asset of the latest release
-          const release = data[0];
-          if (release.assets.length > 0) {
-            const apkAsset = release.assets[0];
-            const downloadCount = apkAsset.download_count;
-
-            // Update the HTML with the download count
-            document.getElementById('download-count').innerText = `Number of downloads: ${downloadCount}`;
-          } else {
-            document.getElementById('download-count').innerText = 'No APK found in the release.';
-          }
-        } else {
-          document.getElementById('download-count').innerText = 'No releases found.';
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching download count:', error);
-        document.getElementById('download-count').innerText = 'Unable to load download count.';
-      });
-  </script>
+	
 <div>
 <h2>Total Page Count</h2>	
 </div>
@@ -1739,76 +1714,8 @@ function closePopup() {
     </div>
 
     <script src="./script.js"></script>
-	<script>
-	function openPopup(imageSrc) {
-    var popup = document.getElementById("popup");
-    var popupImage = document.getElementById("popup-image");
-    popupImage.src = imageSrc;
-    popup.style.display = "block";
-}
+	
 
-function closePopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "none";
-}
-function toggleMenu() {
-    var x = document.getElementById("navbar");
-    if (x.className === "navbar-container") {
-        x.className += " responsive";
-    } else {
-        x.className = "navbar-container";
-    }
-}
-
-</script>
-<script>
-function toggleMenu() {
-    var navbar = document.getElementById("navbar");
-    if (navbar.className === "navbar-container") {
-        navbar.className += " responsive";
-    } else {
-        navbar.className = "navbar-container";
-    }
-}
-</script>
-<script>
-function openPopup(imageSrc) {
-    var popup = document.getElementById("popup");
-    var popupImage = document.getElementById("popup-image");
-    popupImage.src = imageSrc;
-    popup.style.display = "block";
-}
-</script>
-<script>
-function closePopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "none";
-}
-</script>
-<script>
-// Show the pop-up if it hasn't been dismissed for 30 days
-window.onload = function() {
-    var membershipPopup = document.getElementById("membershipPopup");
-    
-    // Check if the popup has been shown within the last 30 days
-    var popupShown = localStorage.getItem('popupShown');
-    var now = new Date().getTime();
-    
-    if (!popupShown || (now - popupShown) > 30*24*60*60*1000) {
-        membershipPopup.style.display = "flex";
-    }
-}
-
-// Function to close the popup
-function closePopup() {
-    var membershipPopup = document.getElementById("membershipPopup");
-    membershipPopup.style.display = "none";
-    
-    // Record the time when the popup was closed
-    localStorage.setItem('popupShown', new Date().getTime());
-}
-
-</script>
 
 </body>
 </html>
