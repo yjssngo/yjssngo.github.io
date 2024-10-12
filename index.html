@@ -928,18 +928,6 @@ function closePopup() {
     var popup = document.getElementById('popup');
     popup.style.display = 'none';
 }
-	
-function openPopup(imageSrc) {
-    var popup = document.getElementById('popup');
-    var popupImage = document.getElementById('popup-image');
-    popupImage.src = imageSrc;
-    popup.style.display = 'block';
-}
-
-function closePopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'none';
-}
 	function openPopup(imageSrc) {
     const popup = document.getElementById('popup');
     const popupImage = document.getElementById('popup-image');
@@ -1094,12 +1082,6 @@ const teamContainer = document.getElementById('teamContainer');
         }
 
         init();
-	function openPopup(imageSrc) {
-    var popup = document.getElementById("popup");
-    var popupImage = document.getElementById("popup-image");
-    popupImage.src = imageSrc;
-    popup.style.display = "block";
-}
 
 function closePopup() {
     var popup = document.getElementById("popup");
@@ -1148,13 +1130,6 @@ function toggleMenu() {
     } else {
         navbar.className = "navbar-container";
     }
-}
-
-function openPopup(imageSrc) {
-    var popup = document.getElementById("popup");
-    var popupImage = document.getElementById("popup-image");
-    popupImage.src = imageSrc;
-    popup.style.display = "block";
 }
 
 function closePopup() {
