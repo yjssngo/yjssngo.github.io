@@ -1117,136 +1117,146 @@ function closePopup() {
     </script>
 	<section id="verify">
 
-		 <div class="form-container">
-        <h1>Verify Membership</h1>
-        <input type="text" id="uniqueIdInput" placeholder="Enter Unique ID" />
-        <button onclick="verifyMember()">Verify</button>
+	 <div class="form-container">
+    <h1>Verify Membership</h1>
+    <input type="text" id="uniqueIdInput" placeholder="Enter Unique ID" />
+    <button onclick="verifyMember()">Verify</button>
 
-        <div id="message"></div>
+    <div id="message"></div>
 
-        <div id="viewOptions" style="display: none;">
-            <button class="btn" onclick="showCertificate()">View Certificate</button>
-            <button class="btn" onclick="showReceipt()">View Receipt</button>
-        </div>
-
-        <div id="certificate" class="outer-border">
-            <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
-            <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
-            <h1>Certificate of Membership</h1>
-	
-            <h2>युवा जनकल्याण सेवा संस्था</h2>
-            <h4>शिक्षित बनो, सशक्त बनो</h4>
-            <div class="decorative-line"></div>
-            <p>This is to certify that</p>
-            <h2 id="certName"></h2>
-            <p>with Unique ID: <strong id="certUniqueId"></strong></p>
-            <p>has been an active member for the year <strong id="certYear"></strong></p>
-            <p>Date of Issue: <span id="certIssueDate"></span></p>
-            <button class="btn" onclick="downloadCertificate()">Download Certificate</button>
-            <button class="btn" onclick="cancel()">Cancel</button>
-        </div>
-
-        <div id="receipt" class="outer-border">
-            <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
-            <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
-            <h1>Payment Receipt</h1>
-            <div class="decorative-line"></div>
-            <p>Received from: <strong id="recName"></strong></p>
-            <p>Unique ID: <strong id="recUniqueId"></strong></p>
-            <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p>
-            <p>Membership Type: <strong id="recType"></strong></p>
-            <p>Date of Issue: <span id="recIssueDate"></span></p>
-            <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
-            <button class="btn" onclick="cancel()">Cancel</button>
-        </div>
+    <!-- Download options visible after verification -->
+    <div id="viewOptions" style="display: none;">
+        <button class="btn" onclick="viewCertificate()">View Certificate</button>
+        <button class="btn" onclick="viewReceipt()">View Receipt</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <!-- Download and cancel options visible after viewing -->
+    <div id="actionOptions" style="display: none;">
+        <button class="btn" onclick="downloadCertificate()">Download Certificate</button>
+        <button class="btn" onclick="downloadReceipt()">Download Receipt</button>
+        <button class="btn" onclick="cancelView()">Cancel</button>
+    </div>
+</div>
 
-    <script>
-        let membersData = [];
+<!-- Certificate template -->
+<div id="certificate" class="outer-border" style="display: none;">
+    <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
+    <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
+    <h1>Certificate of Membership</h1>
+    <h1>युवा जनकल्याण सेवा संस्था</h1>
+    <h2>शिक्षित बनो, सशक्त बनो</h2>
+    <div class="decorative-line"></div>
+    <p>This is to certify that</p>
+    <h2 id="certName"></h2> <!-- Dynamic Name -->
+    <p>with Unique ID: <strong id="certUniqueId"></strong></p> <!-- Dynamic Unique ID -->
+    <p>has been an active member for the year <strong id="certYear"></strong></p> <!-- Dynamic Year -->
+    <p>Date of Issue: <span id="certIssueDate"></span></p>
+</div>
 
-        // Load CSV and store member data in memory
-        fetch('https://yjssngo.github.io/members.csv')
-            .then(response => response.text())
-            .then(data => {
-                membersData = parseCSV(data);
+<!-- Receipt template -->
+<div id="receipt" class="outer-border" style="display: none;">
+    <img src="cover_logo.jpeg" alt="Background Logo" class="background-logo">
+    <img src="main_logo.jpeg" alt="Header Logo" class="header-logo">
+    <h1>Payment Receipt</h1>
+    <div class="decorative-line"></div>
+    <p>Received from: <strong id="recName"></strong></p> <!-- Dynamic Name -->
+    <p>Unique ID: <strong id="recUniqueId"></strong></p> <!-- Dynamic Unique ID -->
+    <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p> <!-- Dynamic Amount -->
+    <p>Membership Type: <strong id="recType"></strong></p> <!-- Dynamic Membership Type -->
+    <p>Date of Issue: <span id="recIssueDate"></span></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+<script>
+    let membersData = [];
+
+    // Load CSV and store member data in memory
+    fetch('https://yjssngo.github.io/members.csv') // Correct CSV path
+        .then(response => response.text())
+        .then(data => {
+            membersData = parseCSV(data);
+        });
+
+    function parseCSV(data) {
+        const rows = data.split("\n");
+        const headers = rows[0].split(",");
+        return rows.slice(1).map(row => {
+            const values = row.split(",");
+            const obj = {};
+            headers.forEach((header, index) => {
+                obj[header.trim()] = values[index] ? values[index].trim() : '';
             });
+            return obj;
+        });
+    }
 
-        function parseCSV(data) {
-            const rows = data.split("\n");
-            const headers = rows[0].split(",");
+    function verifyMember() {
+        const uniqueId = document.getElementById('uniqueIdInput').value.trim();
+        const member = membersData.find(m => m['Unique_ID'] === uniqueId);
 
-            return rows.slice(1).map(row => {
-                const values = row.split(",");
-                const obj = {};
-                headers.forEach((header, index) => {
-                    obj[header.trim()] = values[index] ? values[index].trim() : '';
-                });
-                return obj;
-            });
+        const message = document.getElementById('message');
+        const viewOptions = document.getElementById('viewOptions');
+        const actionOptions = document.getElementById('actionOptions');
+
+        if (member) {
+            message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
+            viewOptions.style.display = 'block';
+
+            sessionStorage.setItem('verifiedMember', JSON.stringify(member));
+        } else {
+            message.innerHTML = "<strong>Member Not Found!</strong>";
+            viewOptions.style.display = 'none';
+            actionOptions.style.display = 'none';
         }
+    }
 
-        function verifyMember() {
-            const uniqueId = document.getElementById('uniqueIdInput').value.trim();
-            const member = membersData.find(m => m['Unique_ID'] === uniqueId);
+    function viewCertificate() {
+        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+        if (!member) return;
 
-            const message = document.getElementById('message');
-            const viewOptions = document.getElementById('viewOptions');
+        document.getElementById('certName').innerText = member['Name'];
+        document.getElementById('certUniqueId').innerText = member['Unique_ID'];
+        document.getElementById('certYear').innerText = new Date().getFullYear();
+        document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
 
-            if (member) {
-                message.innerHTML = `<strong>Member Verified!</strong> Welcome ${member['Name']}`;
-                viewOptions.style.display = 'block';
+        document.getElementById('certificate').style.display = 'block';
+        document.getElementById('actionOptions').style.display = 'block';
+        document.getElementById('viewOptions').style.display = 'none';
+    }
 
-                sessionStorage.setItem('verifiedMember', JSON.stringify(member));
-            } else {
-                message.innerHTML = "<strong>Member Not Found!</strong>";
-                viewOptions.style.display = 'none';
-            }
-        }
+    function viewReceipt() {
+        const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
+        if (!member) return;
 
-        function showCertificate() {
-            const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
-            if (!member) return;
+        document.getElementById('recName').innerText = member['Name'];
+        document.getElementById('recUniqueId').innerText = member['Unique_ID'];
+        document.getElementById('recAmount').innerText = member['Amount'];
+        document.getElementById('recType').innerText = member['Type of Membership'];
+        document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
 
-            document.getElementById('certName').innerText = member['Name'];
-            document.getElementById('certUniqueId').innerText = member['Unique_ID'];
-            document.getElementById('certYear').innerText = new Date().getFullYear();
-            document.getElementById('certIssueDate').innerText = new Date().toLocaleDateString();
+        document.getElementById('receipt').style.display = 'block';
+        document.getElementById('actionOptions').style.display = 'block';
+        document.getElementById('viewOptions').style.display = 'none';
+    }
 
-            const certificate = document.getElementById('certificate');
-            certificate.style.display = 'block';
-        }
+    function cancelView() {
+        document.getElementById('certificate').style.display = 'none';
+        document.getElementById('receipt').style.display = 'none';
+        document.getElementById('actionOptions').style.display = 'none';
+        document.getElementById('viewOptions').style.display = 'block';
+    }
 
-        function showReceipt() {
-            const member = JSON.parse(sessionStorage.getItem('verifiedMember'));
-            if (!member) return;
+    function downloadCertificate() {
+        const certificate = document.getElementById('certificate');
+        html2pdf().from(certificate).save('membership_certificate.pdf');
+    }
 
-            document.getElementById('recName').innerText = member['Name'];
-            document.getElementById('recUniqueId').innerText = member['Unique_ID'];
-            document.getElementById('recAmount').innerText = member['Amount'];
-            document.getElementById('recType').innerText = member['Type of Membership'];
-            document.getElementById('recIssueDate').innerText = new Date().toLocaleDateString();
-
-            const receipt = document.getElementById('receipt');
-            receipt.style.display = 'block';
-        }
-
-        function downloadCertificate() {
-            const certificate = document.getElementById('certificate');
-            html2pdf().from(certificate).save('membership_certificate.pdf');
-        }
-
-        function downloadReceipt() {
-            const receipt = document.getElementById('receipt');
-            html2pdf().from(receipt).save('payment_receipt.pdf');
-        }
-
-        function cancel() {
-            document.getElementById('certificate').style.display = 'none';
-            document.getElementById('receipt').style.display = 'none';
-        }
-    </script>
+    function downloadReceipt() {
+        const receipt = document.getElementById('receipt');
+        html2pdf().from(receipt).save('payment_receipt.pdf');
+    }
+</script>
         
     </section>
 	
