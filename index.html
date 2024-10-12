@@ -12,6 +12,7 @@
 		<!-- Your regular navigation items go here -->
 	</nav>
 <script>
+	
 	function toggleMenu() {
 		var nav = document.querySelector('.main-nav');
 		nav.classList.toggle('show-menu');
@@ -822,7 +823,81 @@ a {
     cursor: pointer;
 }
     </style>
-    
+    <style>
+	    /* Media Coverage Section Styling */
+#media {
+    text-align: center;
+    padding: 20px;
+}
+
+.media-outlets {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: scrollMedia 20s linear infinite;
+}
+
+.media-items {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.media-items img {
+    width: 200px;
+    height: auto;
+    border: 2px solid #000;
+    transition: transform 0.2s;
+}
+
+.media-items:hover img {
+    transform: scale(1.1);
+}
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.popup-content img {
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Animation for scrolling the media */
+@keyframes scrollMedia {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+    </style>
 </head>
 <body>
 <header>
@@ -836,6 +911,7 @@ a {
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmGjiHnCl0IvE34YV-6MlBnaxCm4MZZ5FzXPKqhg5qi5WWVg/viewform?usp=pp_url" target="_blank" class="popup-btn">Fill Membership Form</a>
     </div>
 </div>
+	
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
         const counters = document.querySelectorAll('.counter');
@@ -942,8 +1018,20 @@ function closePopup() {
     var popup = document.getElementById('popup');
     popup.style.display = 'none';
 }
+	function openPopup(imageSrc) {
+    const popup = document.getElementById('popup');
+    const popupImage = document.getElementById('popup-image');
+    popupImage.src = imageSrc;
+    popup.style.display = 'flex';
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+}
+
 </script>
-</script>
+
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
         	<a href="#about">About Us</a>
@@ -1425,79 +1513,7 @@ function closePopup() {
         <img id="popup-image" src="" alt="Popup Image">
     </div>
 </div>
-	/* Media Coverage Section Styling */
-#media {
-    text-align: center;
-    padding: 20px;
-}
-
-.media-outlets {
-    display: flex;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: scrollMedia 20s linear infinite;
-}
-
-.media-items {
-    display: inline-block;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.media-items img {
-    width: 200px;
-    height: auto;
-    border: 2px solid #000;
-    transition: transform 0.2s;
-}
-
-.media-items:hover img {
-    transform: scale(1.1);
-}
-
-/* Popup Styles */
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    position: relative;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.popup-content img {
-    max-width: 100%;
-    max-height: 80vh;
-}
-
-.popup .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Animation for scrolling the media */
-@keyframes scrollMedia {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
+	
 function openPopup(imageSrc) {
     const popup = document.getElementById('popup');
     const popupImage = document.getElementById('popup-image');
