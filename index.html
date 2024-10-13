@@ -837,6 +837,27 @@ a {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
+	 // JavaScript to open the popup with the clicked image
+    function openPopup(imageSrc) {
+        const popup = document.getElementById('popup');
+        const popupImage = document.getElementById('popup-image');
+        popupImage.src = imageSrc; // Set the image source
+        popup.style.display = 'flex'; // Make the popup visible
+    }
+
+    // JavaScript to close the popup
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none'; // Hide the popup
+    }
+
+    // To close the popup when clicking outside the image
+    window.onclick = function(event) {
+        const popup = document.getElementById('popup');
+        if (event.target === popup) {
+            closePopup();
+        }
+    };
 	document.addEventListener('DOMContentLoaded', () => {
         const counters = document.querySelectorAll('.counter');
         const speed = 200; // Speed of the counter animation (lower number = faster)
@@ -1455,6 +1476,12 @@ function closePopup() {
 
     <section id="media">
         <h2>Media Coverage</h2>
+	    <div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span> <!-- Close Button -->
+        <img id="popup-image" src="" alt="Popup Image">
+    </div>
+</div>
 
         <!-- Container for rotating effect -->
         <div class="media-outlets">
@@ -1525,6 +1552,12 @@ function closePopup() {
 			
 			
         </div>
+	    <div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <img id="popup-image" src="" alt="Popup Image">
+    </div>
+</div>
   </section>
   
 <div class="popup" id="popup">
