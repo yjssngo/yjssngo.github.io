@@ -1476,40 +1476,23 @@ function closePopup() {
 
 <section id="media">
 <h2>Media Coverage</h2>
-    <div id="popup" class="popup">
-    <div class="popup-content">
-    <span class="close" onclick="closePopup()">&times;</span> <!-- Close Button -->
-    <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
-    <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
-    <img id="popup-image" src="" alt="Popup Image">
-</div>
-</div>
-	<div id="popup-content" class="popup">
-    <div class="popup-content">
-    <span class="close-btn" onclick="closePopup()">x</span> <!-- Close Button -->
-    <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
-    <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
-    <img id="popup-image" src="" alt="Popup Image">
-</div>
-</div>
-	    <!-----<div id="membershipPopup" class="popup">
-    <div class="popup-content">
+<!-----<div id="membershipPopup" class="popup">
+    	<div class="popup-content">
         <span class="close-btn" onclick="closePopup()">&times;</span>
         <h2>NGO General Membership Open for 2024-25!</h2>
         <p>Join us today to support our mission for 2024-25. <br>Click the button below to fill out the membership form.</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmGjiHnCl0IvE34YV-6MlBnaxCm4MZZ5FzXPKqhg5qi5WWVg/viewform?usp=pp_url" target="_blank" class="popup-btn">Fill Membership Form</a>
     </div>
 </div>
-	    -->
+-->
+<!-- Container for rotating effect -->
+<div id="popup" class="popup">
+<!-- Media items with rotating effect and fixed size -->
+<div class="media-items" onclick="openPopup('./mc1.jpeg')">
+<img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
+<p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
 
-        <!-- Container for rotating effect -->
-        <div class="media-outlets">
-            <!-- Media items with rotating effect and fixed size -->
-            <div class="media-items" onclick="openPopup('./mc1.jpeg')">
-                <img src="./mc1.jpeg" alt="Media Outlet 1 Logo">
-                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर </a></p>
-	    
-            </div>
+</div>
 
             <div class="media-items" onclick="openPopup('./mc2.jpeg')">
                 <img src="./mc2.jpeg" alt="Media Outlet 2 Logo">
@@ -1571,13 +1554,14 @@ function closePopup() {
 			
 			
         </div>
-	    <div class="popup" id="popup">
-    <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <img id="popup-image" src="" alt="Popup Image">
-    </div>
+	
+<div class="popup" id="popup">
+<div class="popup-content">
+<span class="close" onclick="closePopup()">&times;</span>
+<img id="popup-image" src="" alt="Popup Image">
 </div>
-  </section>
+</div>
+</section>
   
 <div class="popup" id="popup">
     <div class="popup-content">
