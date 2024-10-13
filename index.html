@@ -14,32 +14,32 @@
             position: relative;
         }
 
-        .carousel-container {
+        .mc_carousel-container {
             display: flex;
             width: max-content;
-            animation: scroll-left 10s linear infinite;
+            animation: mc_scroll-left 10s linear infinite;
         }
 
-        .carousel-item {
+        .mc_carousel-item {
             margin-right: 15px;
             cursor: pointer;
             position: relative;
         }
 
-        .carousel-item img {
+        .mc_carousel-item img {
             width: 400px;
             height: 200px;
             object-fit: cover;
             border-radius: 8px;
         }
 
-        .carousel-item p {
+        .mc_carousel-item p {
             text-align: center;
             margin: 5px 0;
         }
 
         /* Animation to move the carousel */
-        @keyframes scroll-left {
+        @keyframes mc_scroll-left {
             0% {
                 transform: translateX(0);
             }
@@ -49,12 +49,12 @@
         }
 
         /* Stop animation on hover */
-        .media-carousel:hover .carousel-container {
+        .media-carousel:hover .mc_carousel-container {
             animation-play-state: paused;
         }
 
         /* Popup Modal Styling */
-        .popup-modal {
+        .mc_popup-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -67,18 +67,18 @@
             z-index: 999;
         }
 
-        .popup-content {
+        .mc_popup-content {
             max-width: 90%;
             max-height: 80%;
         }
 
-        #popup-media-link {
+        #mc_popup-media-link {
             color: #fff;
             text-align: center;
             margin-top: 10px;
         }
 
-        .close-btn {
+        .mc_close-btn {
             position: absolute;
             top: 20px;
             right: 30px;
@@ -1565,89 +1565,66 @@ function closePopup() {
 <!----NEw Code for Media Coverage ------>
 
 	<div class="media-carousel">
-        <div class="carousel-container" id="carousel">
-            <div class="carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
+        <div class="mc_carousel-container" id="mc_carousel">
+            <!-- Example of your media coverage -->
+            <div class="mc_carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
                 <img src="./mc1.jpeg" alt="Media 1">
-                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर</a></p>
+                <p>Publisher: दैनिक भास्कर</p>
+                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">View Source</a></p>
             </div>
-		
-            <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
+		<div class="mc_carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
                 <img src="./mc2.jpeg" alt="Media 2">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
+                <p>Publisher: दैनिक भास्कर</p>
+                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">View Source</a></p>
             </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
+		<div class="mc_carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
                 <img src="./mc3.jpeg" alt="Media 3">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
+                <p>Publisher: दैनिक भास्कर</p>
+                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">View Source</a></p>
             </div>
-		 <div class="carousel-item" data-media-link="./media_coverage/mc4.jpeg">
+		<div class="mc_carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
                 <img src="./mc4.jpeg" alt="Media 4">
-                <p><a href="./media_coverage/mc4.jpeg" target="_blank">विंध्य ज्योति</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc5.jpeg" alt="Media 5">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc6.jpeg" alt="Media 6">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc7.jpeg" alt="Media 7">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc8.jpeg" alt="Media 8">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc9.jpeg" alt="Media 9">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
-            </div>
-		 <div class="carousel-item" data-media-link="https://sbnlive.net/?p=149709">
-                <img src="./mc10.jpeg" alt="Media 10">
-                <p><a href="https://sbnlive.net/?p=149709" target="_blank">SBN LIVE</a></p>
+                <p>Publisher: दैनिक भास्कर</p>
+                <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">View Source</a></p>
             </div>
             <!-- Add more carousel items here as needed -->
         </div>
     </div>
 
     <!-- Popup Modal -->
-    <div class="popup-modal" id="popup-modal">
-        <span class="close-btn" id="close-popup">&times;</span>
-        <img class="popup-content" id="popup-image" src="" alt="Popup Image">
-        <div id="popup-media-link"></div>
+    <div class="mc_popup-modal" id="mc_popup-modal">
+        <span class="mc_close-btn" id="mc_close-popup">&times;</span>
+        <img class="mc_popup-content" id="mc_popup-image" src="" alt="Popup Image">
+        <div id="mc_popup-media-link"></div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-	<!-- Inline JavaScript -->
+    <!-- Inline JavaScript -->
     <script>
         // Handling the image click to show in the popup
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const popupModal = document.getElementById('popup-modal');
-        const popupImage = document.getElementById('popup-image');
-        const popupMediaLink = document.getElementById('popup-media-link');
-        const closePopup = document.getElementById('close-popup');
-
-        carouselItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const imgSrc = this.querySelector('img').src;
-                const mediaLink = this.getAttribute('data-media-link');
-                popupImage.src = imgSrc;
-                popupMediaLink.innerHTML = `<a href="${mediaLink}" target="_blank" style="color: white;">Visit Source</a>`;
-                popupModal.style.display = 'flex';
+        document.querySelectorAll('.mc_carousel-item').forEach(mc_item => {
+            mc_item.addEventListener('click', function() {
+                const mc_imgSrc = this.querySelector('img').src;
+                const mc_mediaLink = this.getAttribute('data-media-link');
+                
+                // Set popup image and media link
+                document.getElementById('mc_popup-image').src = mc_imgSrc;
+                document.getElementById('mc_popup-media-link').innerHTML = `<a href="${mc_mediaLink}" target="_blank" style="color: white;">Visit Source</a>`;
+                
+                // Display the popup modal
+                document.getElementById('mc_popup-modal').style.display = 'flex';
             });
         });
 
         // Close the popup when the user clicks on the close button
-        closePopup.addEventListener('click', function() {
-            popupModal.style.display = 'none';
+        document.getElementById('mc_close-popup').addEventListener('click', function() {
+            document.getElementById('mc_popup-modal').style.display = 'none';
         });
 
-        // Close the popup when the user clicks outside the image
+        // Close the popup when the user clicks outside the popup image
         window.addEventListener('click', function(event) {
-            if (event.target === popupModal) {
-                popupModal.style.display = 'none';
+            const mc_modal = document.getElementById('mc_popup-modal');
+            if (event.target === mc_modal) {
+                mc_modal.style.display = 'none';
             }
         });
     </script>
