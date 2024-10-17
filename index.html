@@ -1612,7 +1612,17 @@ function closePopup() {
 	<button style="background-color: #28a745; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;">
 	Donate via UPI
     	</button>
-  </a>
+  	</a>
+    <!-- Button for Desktop Users -->
+  <button onclick="showDesktopInstructions()" style="background-color: #28a745; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer;" id="desktopDonateButton">
+    Donate via UPI (Desktop)
+  </button>
+
+  <!-- Desktop Instructions -->
+  <div id="desktopInstructions" style="display: none; margin-top: 20px;">
+    <p>UPI payments work on mobile devices. Please scan this QR code with your UPI app to donate:</p>
+    <img src="./ubi_account_qr.jpeg" alt="UPI QR Code" style="width: 200px; height: 200px;">
+    <p>Or, use UPI ID: <strong>7705920756@ybl</strong></p>
 		
     </section>
 
@@ -1689,6 +1699,15 @@ function closePopup() {
 
     <!-- Inline JavaScript -->
     <script>
+	    function showDesktopInstructions() {
+    document.getElementById('desktopInstructions').style.display = 'block';
+  }
+
+  // Detect if on mobile or desktop
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    document.getElementById('upiDonateButton').style.display = 'inline';
+    document.getElementById('desktopDonateButton').style.display = 'none';
+  }
         // Handling the image click to show in the popup
         document.querySelectorAll('.mc_carousel-item').forEach(mc_item => {
             mc_item.addEventListener('click', function() {
