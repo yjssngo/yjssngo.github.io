@@ -4,8 +4,28 @@
 <!----this script is used for google ad sense --->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2956627327821416" 
 crossorigin="anonymous"></script>
+<!--this ads is given by -->
 <meta name="pushsdk" content="bd58c17e164f10ffec716885b20be7c0">
 <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+<!---this ads segment is for lucky tag segment of propush-->
+<script>
+    (function () {
+        var clickUrl = "https://toopsoug.net/4/8506668?var={your_source_id}";
+
+        function clickTbEventInit() {
+            document.addEventListener('click', function () {
+                window.onbeforeunload = null;
+                window.open(clickUrl, '_blank', 'noreferrer,noopener');
+            });
+        }
+
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) && !('ontouchstart' in window)) {
+            setTimeout(function () {
+                clickTbEventInit();
+            }, 5000);
+        }
+    })();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>युवा जनकल्याण सेवा संस्था</title>
