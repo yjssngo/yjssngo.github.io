@@ -35,20 +35,26 @@
             padding: 60px 20px;
             background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: white;
-            font-size: 24px;
         }
         .container {
             max-width: 1200px;
             margin: auto;
             padding: 20px;
         }
-        .team {
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .team, .events {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
-        .team-member {
+        .team-member, .event-item {
             text-align: center;
             background: white;
             padding: 20px;
@@ -57,10 +63,10 @@
             width: 250px;
             transition: transform 0.3s;
         }
-        .team-member:hover {
+        .team-member:hover, .event-item:hover {
             transform: scale(1.05);
         }
-        .team-member img {
+        .team-member img, .event-item img {
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -105,12 +111,23 @@
     </section>
 
     <div class="container">
-        <section id="about">
+        <section id="about" class="section">
             <h2>About Us</h2>
             <p>We are a collective of professionals committed to uplifting communities through education, empowerment, and social welfare initiatives.</p>
         </section>
         
-        <section id="team">
+        <section id="mission" class="section">
+            <h2>Our Mission</h2>
+            <ul>
+                <li>Providing education to every home and child.</li>
+                <li>Creating an educated and drug-free society.</li>
+                <li>Emphasizing women's education and empowerment.</li>
+                <li>Promoting technical education among youth.</li>
+                <li>Encouraging environmental protection and sustainability.</li>
+            </ul>
+        </section>
+        
+        <section id="team" class="section">
             <h2>Our Team</h2>
             <div class="team">
                 <div class="team-member">
@@ -122,6 +139,20 @@
                     <img src="./vd.jpeg" alt="Vishnu Dayal">
                     <p>Vishnu Dayal</p>
                     <p>UP Police</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="events" class="section">
+            <h2>Events</h2>
+            <div class="events">
+                <div class="event-item">
+                    <img src="./event1.jpg" alt="Event 1">
+                    <p>Debate Competition 2024</p>
+                </div>
+                <div class="event-item">
+                    <img src="./event2.jpg" alt="Event 2">
+                    <p>Painting Competition 2024</p>
                 </div>
             </div>
         </section>
