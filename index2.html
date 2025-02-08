@@ -91,7 +91,7 @@
         // Fetch and parse the Excel data
         async function fetchAndDisplayMembers() {
             // Fetch the Excel file from the GitHub URL
-            const response = await fetch('yjss.github.io/amembers.xlsx');
+            const response = await fetch('https://yjssngo.github.io/amembers.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
