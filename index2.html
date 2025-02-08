@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGO Active Members</title>
     <style>
-        body {
+        .a_memrs_body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             padding: 20px;
         }
-        .container {
+        .a_memrs_container {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
         }
-        .year-frame {
+        .a_memrs_year_frame {
             border: 1px solid #ddd;
             border-radius: 15px;
             margin: 10px;
@@ -28,13 +28,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .member-list {
+        .a_memrs_list {
             position: absolute;
             bottom: 0;
             width: 100%;
-            animation: scrollUp 15s linear infinite;
+            animation: a_scrollUp 15s linear infinite;
         }
-        @keyframes scrollUp {
+        @keyframes a_scrollUp {
             0% {
                 transform: translateY(100%);
             }
@@ -42,13 +42,13 @@
                 transform: translateY(-100%);
             }
         }
-        .member-item {
+        .a_memrs_item {
             padding: 10px;
             font-size: 16px;
             border-bottom: 1px solid #eee;
             color: #333;
         }
-        h3 {
+        .a_memrs_heading {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 10px;
@@ -56,31 +56,31 @@
         }
     </style>
 </head>
-<body>
-    <h1>Active Members of NGO</h1>
-    <div class="container">
+<body class="a_memrs_body">
+    <h1>Active and Previous Members of NGO</h1>
+    <div class="a_memrs_container">
         <!-- Active Members 2025 Frame -->
-        <div id="active-members-2025" class="year-frame">
-            <h3>Active Members for 2025</h3>
-            <div id="members-2025" class="member-list"></div>
+        <div id="a_memrs_frame_2025" class="a_memrs_year_frame">
+            <h3 class="a_memrs_heading">Active Members for 2025</h3>
+            <div id="a_memrs_list_2025" class="a_memrs_list"></div>
         </div>
 
         <!-- Active Members 2024 Frame -->
-        <div id="active-members-2024" class="year-frame">
-            <h3>Previous Members for 2024</h3>
-            <div id="members-2024" class="member-list"></div>
+        <div id="a_memrs_frame_2024" class="a_memrs_year_frame">
+            <h3 class="a_memrs_heading">Previous Members for 2024</h3>
+            <div id="a_memrs_list_2024" class="a_memrs_list"></div>
         </div>
 
         <!-- Active Members 2023 Frame -->
-        <div id="active-members-2023" class="year-frame">
-            <h3>Previous Members for 2023</h3>
-            <div id="members-2023" class="member-list"></div>
+        <div id="a_memrs_frame_2023" class="a_memrs_year_frame">
+            <h3 class="a_memrs_heading">Previous Members for 2023</h3>
+            <div id="a_memrs_list_2023" class="a_memrs_list"></div>
         </div>
 
         <!-- Active Members 2022 Frame -->
-        <div id="active-members-2022" class="year-frame">
-            <h3>Previous Members for 2022</h3>
-            <div id="members-2022" class="member-list"></div>
+        <div id="a_memrs_frame_2022" class="a_memrs_year_frame">
+            <h3 class="a_memrs_heading">Previous Members for 2022</h3>
+            <div id="a_memrs_list_2022" class="a_memrs_list"></div>
         </div>
     </div>
 
@@ -89,9 +89,9 @@
 
     <script>
         // Fetch and parse the Excel data
-        async function fetchAndDisplayMembers() {
+        async function fetchAndDisplayNGOMembers() {
             // Fetch the Excel file from the GitHub URL
-            const response = await fetch('https://yjssngo.github.io/amembers.xlsx');
+            const response = await fetch('https://your-username.github.io/members.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
@@ -101,14 +101,14 @@
                 const sheet = workbook.Sheets[year];
                 if (sheet) {
                     const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                    displayMembersForYear(year, data);
+                    displayNGOMembersForYear(year, data);
                 }
             });
         }
 
         // Display members for a specific year
-        function displayMembersForYear(year, data) {
-            const yearDiv = document.getElementById(`members-${year}`);
+        function displayNGOMembersForYear(year, data) {
+            const yearDiv = document.getElementById(`a_memrs_list_${year}`);
 
             // Iterate over the rows, extract member names, and add them to the column
             data.forEach((row, index) => {
@@ -119,7 +119,7 @@
                 const memberName = row[2]; // 'Name' is in the 3rd column (index 2)
                 if (memberName) {
                     const memberDiv = document.createElement('div');
-                    memberDiv.classList.add('member-item');
+                    memberDiv.classList.add('a_memrs_item');
                     memberDiv.textContent = memberName;
                     yearDiv.appendChild(memberDiv);
                 }
@@ -127,7 +127,7 @@
         }
 
         // Initialize fetching and displaying data
-        fetchAndDisplayMembers();
+        fetchAndDisplayNGOMembers();
     </script>
 </body>
 </html>
