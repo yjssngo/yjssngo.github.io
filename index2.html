@@ -57,14 +57,14 @@
     </style>
 </head>
 <body>
-    <h1>Active and Previous Members of NGO</h1>
+    <h1>Active Members of NGO</h1>
     <div class="container">
         <!-- Active Members 2025 Frame -->
         <div id="active-members-2025" class="year-frame">
             <h3>Active Members for 2025</h3>
             <div id="members-2025" class="member-list"></div>
         </div>
-
+<h1>Previous Members of NGO</h1>
         <!-- Active Members 2024 Frame -->
         <div id="active-members-2024" class="year-frame">
             <h3>Previous Members for 2024</h3>
@@ -91,7 +91,7 @@
         // Fetch and parse the Excel data
         async function fetchAndDisplayMembers() {
             // Fetch the Excel file from the GitHub URL
-            const response = await fetch('https://yjss.github.io/amembers.xlsx');
+            const response = await fetch('yjss.github.io/amembers.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
