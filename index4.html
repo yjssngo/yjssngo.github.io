@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YJSS NGO - Empowering Communities</title>
   <meta name="description" content="YJSS NGO is dedicated to empowering communities through education, health, and sustainable development.">
-  <link rel="stylesheet" href="./styles3.css">
+  <link rel="stylesheet" href="styles3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body>
   <!-- Header Section -->
@@ -14,18 +16,25 @@
     <div class="container">
       <div class="logo">
         <h1>YJSS NGO</h1>
+        <p class="registration-number">Registration Number: XYZ123456</p>
       </div>
       <nav>
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#programs">Programs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#members">Members</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
+  <!-- Sticky Ribbon Button -->
+  <div class="ribbon">
+    <a href="#donate" class="btn">Donate Now</a>
+  </div>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
@@ -69,15 +78,34 @@
     </div>
   </section>
 
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery">
+  <!-- Events Section -->
+  <section id="events" class="events">
     <div class="container">
-      <h2>Gallery</h2>
-      <div class="gallery-grid">
-        <img src="./bra0.jpeg" alt="Gallery Image 1">
-        <img src="./bra1.jpeg" alt="Gallery Image 2">
-        <img src="./bra2.jpeg" alt="Gallery Image 3">
-        <img src="./bra3.jpeg" alt="Gallery Image 4">
+      <h2>Events</h2>
+      <div class="events-slider">
+        <div><img src="https://via.placeholder.com/800x400" alt="Event 1"></div>
+        <div><img src="https://via.placeholder.com/800x400" alt="Event 2"></div>
+        <div><img src="https://via.placeholder.com/800x400" alt="Event 3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Members Section -->
+  <section id="members" class="members">
+    <div class="container">
+      <h2>Our Members</h2>
+      <div class="member-list">
+        <div class="member-item">
+          <img src="https://via.placeholder.com/150" alt="Member 1">
+          <h3>John Doe</h3>
+          <p>Active Member</p>
+        </div>
+        <div class="member-item">
+          <img src="https://via.placeholder.com/150" alt="Member 2">
+          <h3>Jane Smith</h3>
+          <p>Previous Member</p>
+        </div>
+        <!-- Add more members as needed -->
       </div>
     </div>
   </section>
@@ -107,5 +135,20 @@
       </div>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.events-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        adaptiveHeight: true
+      });
+    });
+  </script>
 </body>
 </html>
