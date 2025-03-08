@@ -84,24 +84,43 @@
     .carousel img.active {
       opacity: 1;
     }
+
+    /* Close Icon Styling */
+    .close-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .close-icon:hover {
+      color: #000;
+    }
   </style>
 </head>
 <body>
   <!-- Popup Notification -->
   <div id="is_col_overlay"></div>
   <div id="is_col_popup">
+    <!-- Close Icon -->
+    <span class="close-icon" onclick="closePopup()">×</span>
+
     <h2>जन समस्याओं का संग्रहण एवं समाधान अभियान</h2>
     <p>युवा जन कल्याण सेवा संस्था द्वारा आपकी व्यक्तिगत एवं सार्वजनिक समस्याओं को सुनने और उनका समाधान करने के लिए एक विशेष अभियान चलाया जा रहा है। कृपया अपनी समस्या हमारे साथ साझा करें।</p>
+    
     <!-- Image Carousel -->
     <div class="carousel">
       <img src="./volley2024_2.jpg" alt="Image 1" class="active">
       <img src="./volley2024_3.jpg" alt="Image 2">
       <img src="./volley2024_4.jpg" alt="Image 3">
-      <img src="./vb2024.jpeg" alt="Image 2">
-      <img src="./volley2024_19.jpeg" alt="Image 3">
-      <img src="./bra14.jpeg" alt="Image 3">
-      
+      <img src="./vb2024.jpeg" alt="Image 4">
+      <img src="./volley2024_19.jpeg" alt="Image 5">
+      <img src="./bra14.jpeg" alt="Image 6">
     </div>
+
     <button onclick="redirectToIssueForm()">समस्या दर्ज करें</button>
   </div>
 
@@ -112,6 +131,12 @@
       document.getElementById('is_col_overlay').style.display = 'block';
       startCarousel();
     };
+
+    // Close Popup Function
+    function closePopup() {
+      document.getElementById('is_col_popup').style.display = 'none';
+      document.getElementById('is_col_overlay').style.display = 'none';
+    }
 
     // Redirect to Google Form
     function redirectToIssueForm() {
