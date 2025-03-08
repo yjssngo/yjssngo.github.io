@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>युवा जनकल्याण सेवा संस्था</title>
+  <style>
+    /* Popup Styling */
+    #is_col_popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url('./volley2024_2.jpg'); /* Add your background image URL */
+      background-size: cover;
+      background-position: center;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff; /* Text color for better visibility */
+    }
+
+    #is_col_popup h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #fff; /* White text for better contrast */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+    }
+
+    #is_col_popup p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #fff; /* White text for better contrast */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+    }
+
+    #is_col_popup button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #is_col_popup button:hover {
+      background-color: #0056b3;
+    }
+
+    #is_col_overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better contrast */
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <!-- Popup Notification -->
+  <div id="is_col_overlay"></div>
+  <div id="is_col_popup">
+    <h2>जन समस्याओं का संग्रहण एवं समाधान अभियान</h2>
+    <p>युवा जन कल्याण सेवा संस्था द्वारा आपकी व्यक्तिगत एवं सार्वजनिक समस्याओं को सुनने और उनका समाधान करने के लिए एक विशेष अभियान चलाया जा रहा है। कृपया अपनी समस्या हमारे साथ साझा करें।</p>
+    <button onclick="redirectToIssueForm()">समस्या दर्ज करें</button>
+  </div>
+
+  <script>
+    // Show Popup on Page Load
+    window.onload = function() {
+      document.getElementById('is_col_popup').style.display = 'block';
+      document.getElementById('is_col_overlay').style.display = 'block';
+    };
+
+    // Redirect to Google Form
+    function redirectToIssueForm() {
+      window.location.href = "YOUR_GOOGLE_FORM_LINK_HERE"; // Replace with your Google Form link
+    }
+  </script>
+</body>
+</html>
