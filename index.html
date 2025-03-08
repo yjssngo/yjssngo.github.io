@@ -243,6 +243,87 @@ l.parentNode.insertBefore(s, l);
     <title>युवा जनकल्याण सेवा संस्था</title>
 
 <!-- Inline CSS for media coverage has been defined here-->
+	<style>
+    /* Popup Styling */
+    #is_col_popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #is_col_popup h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #is_col_popup p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    #is_col_popup button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #is_col_popup button:hover {
+      background-color: #0056b3;
+    }
+
+    #is_col_overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
+
+    /* Carousel Styling */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 200px; /* Adjust height as needed */
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+  </style>
     <style>
         /* Styling the media carousel */
         .media-carousel {
@@ -1661,6 +1742,49 @@ function closePopup() {
 }
 
 </script>
+	<!-- Popup Notification for issue resolutions-->
+  <div id="is_col_overlay"></div>
+  <div id="is_col_popup">
+    <h2>जन समस्याओं का संग्रहण एवं समाधान अभियान</h2>
+    <p>युवा जन कल्याण सेवा संस्था द्वारा आपकी व्यक्तिगत एवं सार्वजनिक समस्याओं को सुनने और उनका समाधान करने के लिए एक विशेष अभियान चलाया जा रहा है। कृपया अपनी समस्या हमारे साथ साझा करें।</p>
+    <!-- Image Carousel -->
+    <div class="carousel">
+      <img src="./volley2024_2.jpg" alt="Image 1" class="active">
+      <img src="./volley2024_3.jpg" alt="Image 2">
+      <img src="./volley2024_4.jpg" alt="Image 3">
+      <img src="./vb2024.jpeg" alt="Image 2">
+      <img src="./volley2024_19.jpeg" alt="Image 3">
+      <img src="./bra14.jpeg" alt="Image 3">
+      
+    </div>
+    <button onclick="redirectToIssueForm()">समस्या दर्ज करें</button>
+  </div>
+
+  <script>
+    // Show Popup on Page Load
+    window.onload = function() {
+      document.getElementById('is_col_popup').style.display = 'block';
+      document.getElementById('is_col_overlay').style.display = 'block';
+      startCarousel();
+    };
+
+    // Redirect to Google Form
+    function redirectToIssueForm() {
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSdXun6tNjVKdWy-t9a9o5JTKbHuFx7m9rA96OQ_bbicvyA8MA/viewform?usp=sharing"; // Replace with your Google Form link
+    }
+
+    // Carousel Functionality
+    function startCarousel() {
+      const images = document.querySelectorAll('.carousel img');
+      let currentIndex = 0;
+
+      setInterval(() => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }, 3000); // Change image every 3 seconds
+    }
+  </script>
 
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
