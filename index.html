@@ -243,7 +243,8 @@ l.parentNode.insertBefore(s, l);
     <title>युवा जनकल्याण सेवा संस्था</title>
 
 <!-- Inline CSS for media coverage has been defined here-->
-	  <style>
+	
+    <style>
     /* Popup Styling */
     #is_col_popup {
       display: none;
@@ -333,6 +334,7 @@ l.parentNode.insertBefore(s, l);
       font-weight: bold;
       color: #333;
       cursor: pointer;
+      z-index: 1001; /* Ensure it's above the popup */
     }
 
     .close-icon:hover {
