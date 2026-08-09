@@ -179,11 +179,11 @@ l.parentNode.insertBefore(s, l);
 -->
 <!--end of adsterra.com---- ads integration --->
 <!-----This Segment for MoneyTag Ad network---->
-<!--<meta name="monetag" content="799ae16fe2e8893d0892ca543777084c">
+<meta name="monetag" content="799ae16fe2e8893d0892ca543777084c">
 <script src="https://alwingulla.com/88/tag.min.js" data-zone="114181" async data-cfasync="false"></script>
-<script src="https://alwingulla.com/88/tag.min.js" data-zone="116349" async data-cfasync="false"></script>-->
+<!--<script src="https://alwingulla.com/88/tag.min.js" data-zone="116349" async data-cfasync="false"></script>
 <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('cimtaiphos.com',8700219,document.createElement('script'))</script>
-<!-----end of  MoneyTag Ad network---->	
+--><!-----end of  MoneyTag Ad network---->	
 <!--this ads is given by push pro-->
 <!--
 <meta name="pushsdk" content="bd58c17e164f10ffec716885b20be7c0">
@@ -243,6 +243,104 @@ l.parentNode.insertBefore(s, l);
     <title>युवा जनकल्याण सेवा संस्था</title>
 
 <!-- Inline CSS for media coverage has been defined here-->
+	
+    <style>
+    /* Popup Styling */
+    #is_col_popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #is_col_popup h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #is_col_popup p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    #is_col_popup button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #is_col_popup button:hover {
+      background-color: #0056b3;
+    }
+
+    #is_col_overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
+
+    /* Carousel Styling */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 200px; /* Adjust height as needed */
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    /* Close Icon Styling */
+    .close-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 1001; /* Ensure it's above the popup */
+    }
+
+    .close-icon:hover {
+      color: #000;
+    }
+  </style>
     <style>
         /* Styling the media carousel */
         .media-carousel {
@@ -427,7 +525,7 @@ l.parentNode.insertBefore(s, l);
     </style>
 
 	
-    <link rel="icon" type="image/x-icon" href="./main_logo.jpeg">
+    <link rel="icon" type="image/x-icon" href="./ngo_logo1.jpeg">
     <link rel="stylesheet" href="./styles.css">
     
 	<button class="menu-icon" onclick="toggleMenu()">☰</button>
@@ -1661,7 +1759,63 @@ function closePopup() {
 }
 
 </script>
+	<!-- Popup Notification for issue resolutions-->
+  <!-- Popup Notification -->
+  <div id="is_col_overlay"></div>
+  <div id="is_col_popup">
+    <!-- Close Icon -->
+    <span class="close-icon" onclick="closePopup()">×</span>
 
+    <h2>जन समस्याओं का संग्रहण एवं समाधान अभियान</h2>
+    <p>युवा जन कल्याण सेवा संस्था द्वारा आपकी व्यक्तिगत एवं सार्वजनिक समस्याओं को सुनने और उनका समाधान करने के लिए एक विशेष अभियान चलाया जा रहा है। कृपया अपनी समस्या हमारे साथ साझा करें।</p>
+    
+    <!-- Image Carousel -->
+    <div class="carousel">
+      <img src="./is2025_1.jpeg" alt="Image 1" class="active">
+	<img src="is2025_2.jpeg" alt="03 nov 2024">
+	<img src="is2025_3.jpeg" alt="03 nov 2024">
+	<img src="is2025_4.jpeg" alt="03 nov 2024">
+	<img src="is2025_5.jpeg" alt="03 nov 2024">
+	<img src="is2025_6.jpeg" alt="03 nov 2024">
+	<img src="is2025_7.jpeg" alt="08 March 2025">
+	<img src="is2025_8.jpeg" alt="03 nov 2024">
+	<img src="is2025_9.jpeg" alt="03 nov 2024">
+    </div>
+
+    <button onclick="redirectToIssueForm()">समस्या दर्ज करें</button>
+  </div>
+
+  <script>
+    // Show Popup on Page Load
+    window.onload = function() {
+      document.getElementById('is_col_popup').style.display = 'block';
+      document.getElementById('is_col_overlay').style.display = 'block';
+      startCarousel();
+    };
+
+    // Close Popup Function
+    function closePopup() {
+      document.getElementById('is_col_popup').style.display = 'none';
+      document.getElementById('is_col_overlay').style.display = 'none';
+    }
+
+    // Redirect to Google Form
+    function redirectToIssueForm() {
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSdXun6tNjVKdWy-t9a9o5JTKbHuFx7m9rA96OQ_bbicvyA8MA/viewform?usp=sharing"; // Replace with your Google Form link
+    }
+
+    // Carousel Functionality
+    function startCarousel() {
+      const images = document.querySelectorAll('.carousel img');
+      let currentIndex = 0;
+
+      setInterval(() => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }, 3000); // Change image every 3 seconds
+    }
+  </script>
     <div class="navbar-container" id="navbar">
 		<a href="#home"></a>
         	<a href="#about">About Us</a>
@@ -1683,7 +1837,7 @@ function closePopup() {
 	<!-- Logo -->
             <div class="logo-container">
                 <div class="logo">
-                    <img src="./logo_sq.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
+                    <img src="./ngo_logo1.jpeg" alt="युवा जनकल्याण सेवा संस्था Logo">
                 </div>
             </div>
 </header>
@@ -1731,15 +1885,11 @@ function closePopup() {
         <div class="team-member">
 			<img src="./Rajesh_Pic.jpg" alt="Rajesh Kumar">
             <p>Rajesh Kumar</p>
-            <p>Senior Data Engineer(bitwise)</p>
+            <p>Senior Data Engineer II</p>
             
         </div>
-		<div class="team-member">
-			<img src="./vd.jpeg" alt="Rajesh Kumar">
-            <p>Vishnu Dayal</p>
-            <p>UP Police</p>
-            
-        </div>
+		
+			
 		<div class="team-member">
 			<img src="./sj.jpeg" alt="Rajesh Kumar">
             <p>Shrikant Jaiswal</p>
@@ -1765,6 +1915,7 @@ function closePopup() {
             <p>Accountant(IO)</p>
             
         </div>
+			
 		<div class="team-member">
 			<img src="./raju.jpeg" alt="Rajesh Kumar">
             <p>Raju</p>
@@ -1792,21 +1943,21 @@ function closePopup() {
         </div>
 		
 		
-		<div class="team-member">
-			<img src="./sr.jpeg" alt="Rajesh Kumar">
-            <p>Shalik Ram</p>
-            <p>NTPC Emp.</p>
-            
-        </div>
-			<div class="team-member">
-			<img src="./rupesh_pic.jpeg" alt="Rajesh Kumar">
-            <p>Rupesh Kumar</p>
-            <p>Student</p>
-            
-        </div>
-			
-			</div>
-    </section>
+		
+	<div class="team-member">
+	<img src="./rupesh_pic.jpeg" alt="Rajesh Kumar">
+	<p>Rupesh Kumar</p>
+	<p>Student</p>
+	
+	</div>
+	<div class="team-member">
+	<img src="./satish.jpeg" alt="Rajesh Kumar">
+	<p>Satish Kumar</p>
+	<p>Social Worker</p>
+	
+	</div>		
+</div>
+</section>
 	
 	<section id="verify">
 
@@ -1857,83 +2008,111 @@ function closePopup() {
     <p>Amount Paid: <strong id="recAmount"></strong> Rs.</p> <!-- Dynamic Amount -->
     <p>Membership Type: <strong id="recType"></strong></p> <!-- Dynamic Membership Type -->
     <p>Date of Issue: <span id="recIssueDate"></span></p>
-</div>
-
-
-
-
-        
-    </section>
+</div>      
+</section>
 	
     <section id="events">
 	<h2>Events</h2>
     <div class="events-containers">
+		
+<div class="event-section1">
+<h3>Inter State Volleyball Tournament 2025([8-9 Nov. 2025])</h3>
+<div class="event-images-container">
+<img src="volleyball2025_7.jpeg" alt="Sep 2025">
+<img src="volleyball2025_8.jpeg" alt="Sep 2025">
+<img src="volleyball2025_9.jpeg" alt="Sep 2025">
+<img src="volleyball2025_10.jpeg" alt="Sep 2025">
+<img src="volleyball2025_11.jpeg" alt="Sep 2025">
+<img src="volleyball2025_12.jpeg" alt="Sep 2025">
+<img src="volleyball2025_13.jpeg" alt="Sep 2025">
+<img src="volleyball2025_14.jpeg" alt="Sep 2025">
+<img src="volleyball2025_15.jpeg" alt="Sep 2025">
+<img src="volleyball2025_16.jpeg" alt="Sep 2025">
+<img src="volleyball2025_17.jpeg" alt="Sep 2025">
+<img src="volley2025_1.jpeg" alt="Sep 2025">
+<img src="volley2025_2.jpeg" alt="Sep 2025">
+<img src="volley2025_3.jpeg" alt="Sep 2025">
+<img src="volley2025_4.jpeg" alt="Sep 2025">
+<img src="volley2025_5.jpeg" alt="Sep 2025">
+<img src="volley2025_6.jpeg" alt="Sep 2025">
+</div>
+			
+<h3>सांसद को ज्ञापन 2025([25/09/2025])</h3>
+<div class="event-images-container">
+<img src="sansad1.jpeg" alt="25 Sep 2025">
+<img src="sansad2.jpeg" alt="25 Sep 2025">
+<img src="sansad3.jpeg" alt="25 Sep 2025">
+<img src="sansad4.jpeg" alt="25 Sep 2025">
+<img src="sansad5.jpeg" alt="25 Sep 2025">
+<img src="sansad6.jpeg" alt="25 Sep 2025">
+<img src="sansad7.jpeg" alt="25 Sep 2025">
+<!-- Add more images for the debate competition if needed -->
+</div>
 	
-        <div class="event-section">
-		<h3>Girls Throw Ball and Boys VolleyBall 2024(03/11/2024)</h3>
-            <div class="event-images-container">
-		<img src="volley2024_1.jpg" alt="03 nov 2024">
-		<img src="volley2024_2.jpg" alt="03 nov 2024">
-		<img src="volley2024_3.jpg" alt="03 nov 2024">
-		<img src="volley2024_4.jpg" alt="03 nov 2024">
-		<img src="volley2024_5.jpg" alt="03 nov 2024">
-		<img src="volley2024_6.jpg" alt="03 nov 2024">
-	
-                <!-- Add more images for the debate competition if needed -->
-            </div>
+<h3>Girls Throw Ball and Boys VolleyBall 2024(03/11/2024)</h3>
+<div class="event-images-container">
+<img src="volley2024_1.jpg" alt="03 nov 2024">
+<img src="volley2024_2.jpg" alt="03 nov 2024">
+<img src="volley2024_3.jpg" alt="03 nov 2024">
+<img src="volley2024_4.jpg" alt="03 nov 2024">
+<img src="volley2024_5.jpg" alt="03 nov 2024">
+<img src="volley2024_6.jpg" alt="03 nov 2024">
+
+<!-- Add more images for the debate competition if needed -->
+</div>
 		
 <h3>Gandhi Jayanti and Lal Bahadur Shastri Jayanti 2024(02/10/2024)</h3>
-            <div class="event-images-container">
-		<img src="./20241002_1.jpeg" alt="02 oct 2024">
-		<img src="./20241002_2.jpeg" alt="02 oct 2024">
-		<img src="./20241002_3.jpeg" alt="02 oct 2024">
-		<img src="./20241002_4.jpeg" alt="02 oct 2024">
-		<img src="./20241002_5.jpeg" alt="02 oct 2024">
-		<img src="./20241002_6.jpeg" alt="02 oct 2024">
-		<img src="./20241002_7.jpeg" alt="02 oct 2024">
-		<img src="./20241002_8.jpeg" alt="02 oct 2024">
-		<img src="./20241002_9.jpeg" alt="02 oct 2024">
-				
-                <!-- Add more images for the debate competition if needed -->
-            </div>
+<div class="event-images-container">
+<img src="./20241002_1.jpeg" alt="02 oct 2024">
+<img src="./20241002_2.jpeg" alt="02 oct 2024">
+<img src="./20241002_3.jpeg" alt="02 oct 2024">
+<img src="./20241002_4.jpeg" alt="02 oct 2024">
+<img src="./20241002_5.jpeg" alt="02 oct 2024">
+<img src="./20241002_6.jpeg" alt="02 oct 2024">
+<img src="./20241002_7.jpeg" alt="02 oct 2024">
+<img src="./20241002_8.jpeg" alt="02 oct 2024">
+<img src="./20241002_9.jpeg" alt="02 oct 2024">
+
+<!-- Add more images for the debate competition if needed -->
+</div>
 		
 		
-		<h3>Dr. Bhimrao Ambedkar Jayanti 2024(14/04/2024)</h3>
-	    <div class="event-images-container">
-		<img src="./bra0.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra1.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra2.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra3.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra4.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra5.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra6.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra7.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra8.jpeg" alt="Bhimrao Ambedkar Jayanti">
-		<img src="./bra9.jpeg" alt="Bhimrao Ambedkar Jayanti">
-				
-                <!-- Add more images for the debate competition if needed -->
-            </div>
-			
-            
-        
-        <div class="event-section">
-            <h3>Painting Competition 2024(03/03/2024)</h3>
-            <div class="event-images-container">
-                <img src="./painting1.jpg" alt="Painting Competition">
-		<img src="./painting2.jpg" alt="Painting Competition">
-		<img src="./painting3.jpg" alt="Painting Competition">
-		<img src="./painting4.jpg" alt="Painting Competition">
-		<img src="./painting5.jpg" alt="Painting Competition">
-		<img src="./painting6.jpg" alt="Painting Competition">
-		<img src="./painting7.jpg" alt="Painting Competition">
-		<img src="./painting8.jpg" alt="Painting Competition">
-		<img src="./painting9.jpg" alt="Painting Competition">
-                <!-- Add more images for the painting competition if needed -->
-            </div>
-        </div>
-		</div>
+<h3>Dr. Bhimrao Ambedkar Jayanti 2024(14/04/2024)</h3>
+<div class="event-images-container">
+<img src="./bra0.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra1.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra2.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra3.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra4.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra5.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra6.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra7.jpeg" alt="Bhimrao Ambedkar Jayanti">
+<img src="./bra8.jpeg" alt="Bhimrao Ambedkar Jayanti">
+
+
+<!-- Add more images for the debate competition if needed -->
+</div>
+
+
+
+<div class="event-section1">
+<h3>Painting Competition 2024(03/03/2024)</h3>
+<div class="event-images-container">
+<img src="./painting1.jpg" alt="Painting Competition">
+<img src="./painting2.jpg" alt="Painting Competition">
+<img src="./painting3.jpg" alt="Painting Competition">
+<img src="./painting4.jpg" alt="Painting Competition">
+<img src="./painting5.jpg" alt="Painting Competition">
+<img src="./painting6.jpg" alt="Painting Competition">
+<img src="./painting7.jpg" alt="Painting Competition">
+<img src="./painting8.jpg" alt="Painting Competition">
+<img src="./painting9.jpg" alt="Painting Competition">
+<!-- Add more images for the painting competition if needed -->
+</div>
+</div>
+</div>
 		
-		<div class="event-section">
+		<div class="event-section1">
 		<h3>Debate Competition 2024(24/02/24)</h3>
             <div class="event-images-container">
                 <img src="./debate1.jpg" alt="Debate Competition">
@@ -1980,9 +2159,38 @@ function closePopup() {
 <h2>Media Coverage</h2>
 <!----NEw Code for Media Coverage ------>
 
-	<div class="media-carousel">
-        <div class="mc_carousel-container" id="mc_carousel">
-            <!-- Example of your media coverage -->
+<div class="media-carousel">
+<div class="mc_carousel-container" id="mc_carousel">
+<!--Volleyball 2025-->
+<div class="mc_carousel-item" data-media-link="https://sbnlive.net/?p=170625"><img src="./volleyball2025_8.jpeg" alt="Media 1">
+<p><a href="https://sbnlive.net/?p=170625" target="_blank">SBNLIVE</a></p></div>
+	<div class="mc_carousel-item" data-media-link="https://p9bharatnews.in/archives/26479"><img src="./volleyball2025_9.jpeg" alt="Media 1">
+<p><a href="https://p9bharatnews.in/archives/26479" target="_blank">p9bharatnews</a></p></div>
+	<div class="mc_carousel-item" data-media-link="https://epaper.amarujala.com/sonbhadra/2025-11-09/01.html?format=img&ed_code=sonbhadra "><img src="./volley2025_1.jpeg" alt="Media 1">
+<p><a href="https://epaper.amarujala.com/sonbhadra/2025-11-09/01.html?format=img&ed_code=sonbhadra " target="_blank">Amar Ujala</a></p></div>
+
+	
+<div class="mc_carousel-item" data-media-link="https://p9bharatnews.in/archives/26479"><img src="./volley2025_1.jpeg" alt="Media 1">
+<p><a href="https://p9bharatnews.in/archives/26479" target="_blank">p9bharatnews</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://dainik.bhaskar.com/LWAJeDKe8Wb"><img src="./volley2025_2.jpeg" alt="Media 2">
+<p><a href="https://dainik.bhaskar.com/LWAJeDKe8Wb" target="_blank">dainik bhaskar</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://sbnlive.net/?p=169334"><img src="./volley2025_3.jpeg" alt="Media 3">
+<p><a href="https://sbnlive.net/?p=169334" target="_blank">sbnlive</a></p></div>
+
+<!--Sanasad Gyapan 2025 -->
+<div class="mc_carousel-item" data-media-link="http://svgtvindia.in/news?id=12292"><img src="./sansad1.jpeg" alt="Media 1">
+<p><a href="http://svgtvindia.in/news?id=12292" target="_blank">svgtvindia</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://indianewslivetv.com/5357/"><img src="./sansad2.jpeg" alt="Media 2">
+<p><a href="https://indianewslivetv.com/5357/" target="_blank">indianewslivetv</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://sbnlive.net/?p=169030"><img src="./sansad3.jpeg" alt="Media 3">
+<p><a href="https://sbnlive.net/?p=169030" target="_blank">sbnlive</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://p9bharatnews.in/archives/26035"><img src="./sansad4.jpeg" alt="Media 4">
+<p><a href="https://p9bharatnews.in/archives/26035" target="_blank">p9bharatnews</a></p></div>
+<div class="mc_carousel-item" data-media-link="https://indianewslivetv.com/5357/"><img src="./sansad5.jpeg" alt="Media 5">
+<p><a href="https://indianewslivetv.com/5357/" target="_blank">indianewslivetv</a></p></div>
+
+
+			
             <div class="mc_carousel-item" data-media-link="https://dainik-b.in/0lSQpBxkFHb">
                 <img src="./mc1.jpeg" alt="Media 1">
                 <p><a href="https://dainik-b.in/0lSQpBxkFHb" target="_blank">दैनिक भास्कर</a></p>
@@ -2309,6 +2517,24 @@ function closePopup() {
 <noscript>
 <a href="https://www.freecounterstat.com" title="website counter"><img src="https://counter6.optistats.ovh/private/freecounterstat.php?c=emc8fdak6t195m4c41y191w291yuphyt" border="0" title="website counter" alt="website counter"></a>
 </noscript>
+		<!--this is for other websites / products listing purpose -->
+		<div>
+			<script>
+// Load the showcase from your GitHub Pages URL
+fetch("https://kumarrajeshconsultancy.github.io/projects-showcase.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('projects-showcase').innerHTML = data;
+  })
+  .catch(error => {
+    console.error('Error loading projects showcase:', error);
+  });
+</script>
+<!--end for other websites / products listing purpose -->
+		</div>
+       <div id="projects-showcase"></div>
+
+
 
     <footer>
     <div class="social-media">
@@ -2324,7 +2550,7 @@ function closePopup() {
     <!-- Website developer information -->
     <div class="developer-info">
 <!--<p>Website developed by: <a href="https://kumarbrotherscompany.github.io/home.htm" style="color:white">Rajesh Kumar</a></p>-->
-        <p>Website developed by: <a href="https://www.instagram.com/iiit_champ/" style="color:white">Rajesh Kumar</a></p>
+        <p>Website developed by: <a href="https://www.linkedin.com/in/krajesh07/" style="color:white">Rajesh Kumar</a></p>
     </div>
 
     <div class="developer-social">
@@ -2356,12 +2582,14 @@ function closePopup() {
     <script src="./script.js"></script>
 <!----this segment is also used for some additional ads integration in body tag--->	
 <!---infolinks --->
-<script type="text/javascript">
+<!--
+		<script type="text/javascript">
 var infolinks_pid = 3429125;
 var infolinks_wsid = 0;
 </script>
 <script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
 <!---PopCash---Tabunder--->
+<!--
 <script type="text/javascript">
 var uid = '483814';
 var wid = '730295';
@@ -2369,6 +2597,7 @@ var pop_tag = document.createElement('script');pop_tag.src='//cdn.popcash.net/sh
 pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag.src='//cdn2.popcash.net/show.js';document.body.appendChild(pop_tag)};
 </script>
 <!---PopCash----Popup--->
+		<!--
 <script type="text/javascript">
    var uid = '483814';
    var wid = '730295';
@@ -2379,3 +2608,22 @@ pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag
 <!----end of ads segment which used for some additional ads integration in body tag--->	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
