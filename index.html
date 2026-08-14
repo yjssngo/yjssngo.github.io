@@ -1044,6 +1044,100 @@
         .media-popup .popup-link a:hover {
             text-decoration: underline;
         }
+
+        /* ---------- INDEPENDENCE DAY POPUP ---------- */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            padding: 20px;
+        }
+        .popup-overlay.active { display: flex; }
+
+        .popup-box {
+            background: #ffffff;
+            max-width: 700px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .popup-header {
+            background: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .popup-header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1a2a2a;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.6);
+        }
+        .popup-header span { font-size: 0.9rem; font-weight: 600; color: #0f6e3f; display: block; }
+
+        .popup-body {
+            padding: 24px;
+            text-align: center;
+        }
+        .popup-body h3 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+        .popup-body .motto { color: var(--text-light); font-size: 0.95rem; margin-bottom: 16px; }
+
+        .popup-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 4px 0 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            margin: 10px 0 16px;
+        }
+        .popup-gallery img {
+            flex: 0 0 140px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px solid #e8f5ee;
+            transition: 0.2s;
+            cursor: default;
+        }
+        .popup-gallery img:hover { transform: scale(1.05); }
+
+        .popup-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+        .popup-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(15, 110, 63, 0.3);
+        }
     </style>
 </head>
 
@@ -1541,6 +1635,35 @@
     </div>
 </div>
 
+<!-- ========== INDEPENDENCE DAY POPUP 2026 ========== -->
+<div class="popup-overlay" id="independencePopup">
+    <div class="popup-box">
+        <div class="popup-header">
+            <h1>🇮🇳 15 अगस्त 2026 🇮🇳</h1>
+            <span>स्वतंत्रता दिवस की हार्दिक शुभकामनाएं</span>
+        </div>
+        <div class="popup-body">
+            <h3>युवा जनकल्याण सेवा संस्थान</h3>
+            <p class="motto">"शिक्षित बनो, सशक्त बनो" — Be Educated, Be Empowered</p>
+            
+            <p style="font-size:0.9rem; color:#4a5a5a; margin-bottom:12px;">
+                <strong>Our journey of empowering communities:</strong>
+            </p>
+            
+            <!-- The gallery will be automatically injected here by JS -->
+            <div class="popup-gallery" id="popupGallery"></div>
+
+            <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:16px;">
+                On this Independence Day, let's pledge to build a stronger, educated, and drug‑free India.
+            </p>
+
+            <button class="popup-btn" onclick="closeIndependencePopup()">
+                <i class="fas fa-heart" style="margin-right:8px;"></i> Thank you, Jai Hind!
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- ========== SCRIPTS ========== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js">
 </script>
@@ -1801,6 +1924,66 @@
     function showDesktopInstructions() {
         const box = document.getElementById('desktopInstructions');
         if (box) box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // ========== INDEPENDENCE DAY POPUP LOGIC ==========
+    function showIndependencePopup() {
+        const today = new Date();
+        // Check if today is 15 August 2026
+        const isToday = today.getDate() === 15 && today.getMonth() === 7 && today.getFullYear() === 2026;
+        
+        // Also check if the user closed it in this session
+        const closed = sessionStorage.getItem('yjss_independence_closed');
+        
+        if (isToday && !closed) {
+            document.getElementById('independencePopup').classList.add('active');
+            document.body.style.overflow = 'hidden'; // lock scroll
+            buildPopupGallery();
+        }
+    }
+
+    function closeIndependencePopup() {
+        document.getElementById('independencePopup').classList.remove('active');
+        document.body.style.overflow = '';
+        sessionStorage.setItem('yjss_independence_closed', 'true');
+    }
+
+    // Build the motivational event gallery inside the popup
+    function buildPopupGallery() {
+        const gallery = document.getElementById('popupGallery');
+        // Use your existing mediaItems to show your work
+        const topImages = [
+            { img: './yjss_free_edu1.jpeg', label: 'Free Education Drive' },
+            { img: './volleyball2025_8.jpeg', label: 'Sports for Youth' },
+            { img: './diamond_ground3.jpeg', label: 'Village Development' },
+            { img: './sansad1.jpeg', label: 'Civic Empowerment' },
+            { img: './bra0.jpeg', label: 'Social Harmony' },
+            { img: './dodharschool1.jpg', label: 'Community Impact' }
+        ];
+
+        gallery.innerHTML = '';
+        topImages.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'media-item';
+            div.style.flex = '0 0 140px'; // ensure width
+            div.innerHTML = `
+                <img src="${item.img}" alt="${item.label}" loading="lazy" />
+                <div class="media-label" style="font-size:0.7rem; padding:4px;">${item.label}</div>
+            `;
+            // Allow clicking the image to open the main media popup if they want
+            div.addEventListener('click', () => {
+                openMediaPopup(item.img, '#'); 
+            });
+            gallery.appendChild(div);
+        });
+    }
+
+    // Trigger the popup when the page loads
+    document.addEventListener('DOMContentLoaded', showIndependencePopup);
+
+    // Also check when the page is fully loaded (in case DOMContentLoaded ran before script)
+    if (document.readyState === 'complete') {
+        showIndependencePopup();
     }
 
     console.log('युवा जनकल्याण सेवा संस्थान— Website loaded successfully.');
